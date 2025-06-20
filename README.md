@@ -1,8 +1,8 @@
 # Customer-Retention-Analysis
 
 # Table of Contents
-- [Project Goal](#Project-Goal)
-- [Summary](#Summaryl)
+- [Project Goal](#Project-Goals)
+- [Summary](#Summary)
 - [Introduction](#Introduction)
 - [Key Insights](#Key-Insights)
 - [Dashboard](#Dashboard)
@@ -13,7 +13,9 @@
 ### Problem Statement
 Which customers should the company prioritize for a targeted marketing campaign to improve customer retention and maximize revenue over the next 6 months?
 
-The purpose of this project is to identify customers who are at the highest risk of churning such that a targeting campaign would optimize the company's resources. 
+## The purpose of this project is to identify customers who are at the highest risk of churning to minimize the amount of financial lose and maximize the 
+
+
 
 
 ### Stakeholder Questions
@@ -26,9 +28,16 @@ The purpose of this project is to identify customers who are at the highest risk
 # Summary 
 
 # Introduction
-Often times, retaining customers is cheaper than acquiring new ones, thus the targeted marketing campaign would maximize ROI by minimizing customer churn. 
+A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to provide a dashboard to help non-technical stakeholders target key customers and 
 
 # Key Insights
+Our dataset includes the company's order history over the period of 2 years (2010 and 2011). We quantified customer retention using 3 primary metrics:
+* Customer Retention Rate (CRR)
+* Customer Churn Rate 
+* Repeated Purchase Rate (RPR)
+
+1. Customer Retention Rate - 
+
 
 # Dashboard
 
