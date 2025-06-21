@@ -7,11 +7,12 @@
 - [Key Insights](#Key-Insights)
 - [Dashboard](#Dashboard)
 - [Dashboard](#Recommendations)
-
+- [Data Cleaning](#Data-Cleaning)
 
 # Project Goals
 ### Problem Statement
 Which customers should the company prioritize for a targeted marketing campaign to improve customer retention and maximize revenue over the next 6 months?
+
 
 ## The purpose of this project is to identify customers who are at the highest risk of churning to minimize the amount of financial lose and maximize the 
 
@@ -42,7 +43,6 @@ Our dataset includes the company's order history over the period of 2 years (201
 # Dashboard
 
 # Recommendations
-
 
 
 
