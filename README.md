@@ -17,8 +17,6 @@ Which customers should the company prioritize for a targeted marketing campaign 
 ## The purpose of this project is to identify customers who are at the highest risk of churning to minimize the amount of financial lose and maximize the 
 
 
-
-
 ### Stakeholder Questions
 1. How should we prioritize customers for marketing campaign?
 2. How can we measure whether the campaign improves retention or revenue?
@@ -29,7 +27,7 @@ Which customers should the company prioritize for a targeted marketing campaign 
 # Summary 
 
 # Introduction
-A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to provide a dashboard to help non-technical stakeholders target key customers and 
+A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to provide a dashboard to help non-technical stakeholders target key customers and validate some hypotheses using **SQL**.
 
 # Key Insights
 Our dataset includes the company's order history over the period of 2 years (2010 and 2011). We quantified customer retention using 3 primary metrics:
@@ -38,7 +36,8 @@ Our dataset includes the company's order history over the period of 2 years (201
 * Repeated Purchase Rate (RPR)
 
 1. Customer Retention Rate - 
-
+2. Customer Churn Rate 
+    - We define Churn as whether a customer does not have a purchase within 365 days (a year) from their previous purchase.
 
 # Dashboard
 
