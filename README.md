@@ -37,7 +37,7 @@ Our dataset includes the company's order history over the period of 2 years (201
 
 1. Customer Retention Rate - 
 2. Customer Churn Rate 
-    - We define Churn as whether a customer does not have a purchase within 365 days (a year) from their previous purchase.
+    - 
 
 # Dashboard
 
