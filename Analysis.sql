@@ -24,6 +24,6 @@ Which Customers do we target that are most likely to be retained?
 
 I will use Recency, Frequency, and Market Value analysis. */
 
-SELECT InvoiceDate, CustomerID
-FROM dbo.Online_Retail
-CAST(InvoiceDate AS Date) AS InvoiceDate
+-- SELECT InvoiceDate, CustomerID
+-- FROM dbo.Online_Retail
+-- CAST(InvoiceDate AS Date) AS InvoiceDate
