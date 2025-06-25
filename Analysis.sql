@@ -28,20 +28,75 @@ H9: Customers with only 1 purchase have a 70%+ chance of not returning.
 H10: Customers with low Quantity per Invoice are more likely to churn.
 */
 
--- H1: Customers who buy multiple product categories are more likely to return.
 
-SELECT TOP 5
-    CustomerID, 
-    COUNT(DISTINCT(Description)) AS Unique_Products
-FROM dbo.Online_Retail
-WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 -- Remove empty strings and nulls
-GROUP BY CustomerID
-ORDER BY Unique_Products DESC
 
-SELECT *
-FROM dbo.Online_Retail
-WHERE CustomerID = 14911 AND Description IS NOT NULL AND LEN(TRIM(Description)) > 0
-ORDER BY StockCode DESC 
+/*
+ H1: Customers who buy multiple product categories are more likely to return.
+Define retention: Customer has made another purchase within 1 month (30 days) from their original purchase
+Compare the retention of customers with multiple products vs. without multiple products
+Multiple products definition: >= 16 distinct products
+*/
+
+-- Determine how many distinct products the bottom 30% of customers have. 
+-- Customers ranked by how many distinct products they have - Ex: Top 99% has 1000 products (most). Bottom 1% has 1 distinct product
+
+-- WITH Product_Counts AS (
+-- SELECT 
+--     CustomerID, 
+--     COUNT(DISTINCT(Description)) AS Unique_Products
+-- FROM dbo.Online_Retail
+-- WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 -- Remove empty strings and nulls
+-- GROUP BY CustomerID
+-- ),
+-- Rank_Customers AS (
+--     SELECT *,
+--         Percent_Rank() OVER (ORDER BY Unique_Products ASC ) AS Percent_Rank
+--     FROM Product_Counts
+-- )
+-- SELECT MAX(Unique_Products) AS Bottom30
+-- FROM Rank_Customers
+-- WHERE Percent_Rank <= 0.3;
+
+WITH Product_Counts AS (
+    SELECT 
+        CustomerID, 
+        COUNT(DISTINCT(Description)) AS Unique_Products
+    FROM dbo.Online_Retail
+    WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL-- Remove empty strings and nulls
+    GROUP BY CustomerID
+),
+Retention AS (
+    SELECT 
+        CustomerID,
+        MAX(InvoiceDate) AS first_purchase,
+        MIN(InvoiceDate) AS recent_purchase
+    FROM dbo.Online_Retail
+    WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL
+)
+
+SELECT 
+    CustomerID,
+    CASE WHEN 
+        DATEDIFF(day, MIN(InvoiceDate), MAX(InvoiceDate)) >= 30 THEN 1
+        ELSE 0
+    END AS Retention,
+    CASE WHEN
+        Unique_Products >= 16 THEN 1
+        ELSE 0
+    END AS Multiple_Product
+
+FROM Product_Counts
+
+
+
+
+
+
+
+
+
+
+
 
 
 
