@@ -57,6 +57,10 @@ Multiple products definition: >= 16 distinct products
 -- FROM Rank_Customers
 -- WHERE Percent_Rank <= 0.3;
 
+
+
+-- Multiple products definition: >= 16 distinct products
+--Include multiple products column
 WITH Product_Counts AS (
     SELECT 
         CustomerID, 
@@ -65,28 +69,67 @@ WITH Product_Counts AS (
     WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL-- Remove empty strings and nulls
     GROUP BY CustomerID
 ),
-Retention AS (
+
+MultipleProduct AS (
+    SELECT
+        CustomerID,
+        CASE WHEN 
+            Unique_Products >= 16 THEN 1
+            ELSE 0
+        END AS Multiple_Product
+    FROM Product_Counts
+),
+
+-- Include Retention
+PurchaseSpan AS (
     SELECT 
         CustomerID,
         MAX(InvoiceDate) AS first_purchase,
         MIN(InvoiceDate) AS recent_purchase
     FROM dbo.Online_Retail
     WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL
+    GROUP BY CustomerID
+),
+
+Retained AS (
+    SELECT 
+        CustomerID,
+        CASE WHEN
+            DATEDIFF(day,first_purchase, recent_purchase) >= 30 THEN 1
+            ELSE 0
+        END AS Retained
+    FROM PurchaseSpan
+),
+
+-- Combine into one query:
+-- CustomerID with 2 binary columns: 
+-- 1) label 1 if considered multiple product customer (>=16) 
+-- 2) label 1 if considered retained (purchase within 30 days from initial)
+
+Combined AS (
+    SELECT
+        T.CustomerID,
+        a.Multiple_Product,
+        b.Retained
+    FROM dbo.Online_Retail T
+    LEFT JOIN MultipleProduct a ON T.CustomerID = a.CustomerID
+    LEFT JOIN Retained b ON T.CustomerID = b.CustomerID
 )
 
-SELECT 
-    CustomerID,
-    CASE WHEN 
-        DATEDIFF(day, MIN(InvoiceDate), MAX(InvoiceDate)) >= 30 THEN 1
-        ELSE 0
-    END AS Retention,
-    CASE WHEN
-        Unique_Products >= 16 THEN 1
-        ELSE 0
-    END AS Multiple_Product
+SELECT
+    Multiple_Product,
+    AVG(CAST(Retained AS FLOAT)) AS Retention_Rate
+FROM Combined
+GROUP BY Multiple_Product
 
-FROM Product_Counts
+/*Result:
 
+Multiple _Product         Retention Rate
+    0	                0.10345541071798055
+    1	                0.4888117183968118
+
+We see here that customers who order multiple products indeed have a higher retention rate.
+*/
 
 
 
