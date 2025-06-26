@@ -31,11 +31,13 @@ H10: Customers with low Quantity per Invoice are more likely to churn.
 
 
 /*
- H1: Customers who buy multiple product categories are more likely to return.
+ ------------------------------H1: Customers who buy multiple product categories are more likely to return.-------------------------------------
+
+
+
 Define retention: Customer has made another purchase within 1 month (30 days) from their original purchase
 Compare the retention of customers with multiple products vs. without multiple products
 Multiple products definition: >= 16 distinct products
-*/
 
 -- Determine how many distinct products the bottom 30% of customers have. 
 -- Customers ranked by how many distinct products they have - Ex: Top 99% has 1000 products (most). Bottom 1% has 1 distinct product
@@ -122,23 +124,68 @@ SELECT
 FROM Combined
 GROUP BY Multiple_Product
 
-/*Result:
+    /*Result:
 
-Multiple _Product         Retention Rate
-    0	                0.10345541071798055
-    1	                0.4888117183968118
+    Multiple _Product         Retention Rate
+        0	                0.10345541071798055
+        1	                0.4888117183968118
 
-We see here that customers who order multiple products indeed have a higher retention rate.
+    We see here that customers who order multiple products indeed have a higher retention rate.
+    */
+
 */
 
+----------------------------------------------------------------------- H2: Customers who make their first purchase in December have lower retention.
+-- The idea behind this hypothesis is that December shopped are seasonal
+-- Like before, a retained customer retained has repurchased 30+ days after their initial purchase.
+
+WITH Purchases AS (
+    SELECT 
+        CustomerID,
+        MIN(InvoiceDate) AS First_Purchase,
+        MAX(InvoiceDate) AS Last_Purchase
+    FROM dbo.Online_Retail
+    GROUP BY CustomerID
+),
+
+Retention AS (
+    SELECT 
+        CustomerID,
+        CASE WHEN 
+            DATEDIFF(day, First_Purchase, Last_Purchase) >= 30 THEN 1
+            ELSE 0
+        END AS Retained,
+
+        CASE WHEN
+            Month(First_Purchase) = 12 AND Year(First_Purchase) = 2010 THEN 1
+            ELSE 0
+        END AS Dec_First_Purchase
+    FROM Purchases
+    WHERE NOT (Month(First_Purchase) = 12 AND Year(First_Purchase) = 2011) --We dont have Jan 2012, to correctly identify 1 month retention, so we can only use Dec 2010
+)
+
+SELECT 
+    Dec_First_Purchase,
+    AVG(CAST(Retained AS FLOAT)) AS Retention_Rate
+FROM Retention 
+GROUP BY Dec_First_Purchase
+
+/*
+Result:
+Dec First Purchase             Retention Rate
+        0	                  0.2898916057474162
+        1	                  0.5616438356164384
+
+We see here that those who actually purchase in december have a higher retention rate than those who do not. This could mean that the products purchased may 
+not be correlated speficially with seasonality (Christmas or gift-giving)
+*/
+
+--------------------------------------------------------H3: The average days between purchases is shorter for loyal customers.
+/*
+First, let's define what's considered a loyal customer  
 
 
-
-
-
-
-
-
+*/
 
 
 
