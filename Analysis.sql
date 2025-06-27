@@ -139,6 +139,7 @@ GROUP BY Multiple_Product
 -- The idea behind this hypothesis is that December shopped are seasonal
 -- Like before, a retained customer retained has repurchased 30+ days after their initial purchase.
 
+/*
 WITH Purchases AS (
     SELECT 
         CustomerID,
@@ -169,6 +170,8 @@ SELECT
     AVG(CAST(Retained AS FLOAT)) AS Retention_Rate
 FROM Retention 
 GROUP BY Dec_First_Purchase
+*/
+
 
 /*
 Result:
@@ -180,12 +183,72 @@ We see here that those who actually purchase in december have a higher retention
 not be correlated speficially with seasonality (Christmas or gift-giving)
 */
 
---------------------------------------------------------H3: The average days between purchases is shorter for loyal customers.
+-----------------------------------------------H3: The average days between purchases is shorter for loyal customers.
 /*
-First, let's define what's considered a loyal customer  
+Using RFM analysis, I will define a "loyal customer" as someone who falls under the top 70% of Recency and top 30% of Frequency. 
+Although I already did RFM analysis in excel, we wil use SQL as well to do this.
+
+* Encoutered issue where SQL interepreted InvoiceDate as dd/mm/yyyy rather than mm/dd/yyyy, which led to 8/2/2011 being more recent than 12/7/2011 - Incorrect.
+Problem initially identified when comparing RFM analysis on SQL with RFM on Excel.
+
+Fixed by Casting InvoiceDate explicitly as DATE. 
 
 
 */
+
+WITH Orders AS (
+    SELECT 
+        CustomerID,
+        MIN(CAST(InvoiceDate AS DATE)) AS first_purchase,
+        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+        COUNT(DISTINCT InvoiceDate) AS Num_orders
+    FROM dbo.Online_Retail
+    WHERE CustomerID IS NOT NULL 
+    GROUP BY CustomerID
+),
+
+RFM AS (
+    SELECT 
+        CustomerID,
+        PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
+        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency
+    FROM Orders
+),
+
+Loyalty AS (
+    SELECT 
+    O.CustomerID,
+    first_purchase,
+    recent_purchase,
+    Num_orders,
+    CASE WHEN 
+        Recency >= 7 AND Frequency >= 3 THEN 1
+        ELSE 0
+    END AS Loyalty
+FROM Orders O 
+LEFT JOIN RFM R ON O.CustomerID = R.CustomerID
+)
+
+SELECT 
+    Loyalty,
+    AVG(DATEDIFF(day, first_purchase, recent_purchase) * 1.0 / NULLIF(Num_orders - 1,0)) AS AvgDayBetweenPurchase
+FROM Loyalty
+GROUP BY Loyalty  
+
+
+/*
+Result:
+Loyalty - Binary col of whether loyal customer or not. I have demonstrated that H3 is true - Loyal customers have fewer average days between purchases.
+
+Loyalty     AvgDayBetweenPurchases
+0	             65.281286628245
+1	             53.301462446130
+
+*/
+
+
+------------------------------------------
+
 
 
 
