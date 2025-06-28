@@ -13,7 +13,7 @@ H2: Customers who make their first purchase in December have lower retention.
 
 H3: The average days between purchases is shorter for loyal customers.
 
-H4: High-frequency customers tend to purchase fewer items per order but more often.
+H4: High-frequency customers tend to purchase more items per order but more often.
 
 H5: Customers in Segment X (e.g., RFM 555) increased spending after the campaign.
 
@@ -207,7 +207,7 @@ WITH Orders AS (
         CustomerID,
         MIN(CAST(InvoiceDate AS DATE)) AS first_purchase,
         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
-        COUNT(DISTINCT InvoiceDate) AS Num_orders
+        COUNT(DISTINCT InvoiceNo) AS Num_orders
     FROM dbo.Online_Retail
     WHERE CustomerID IS NOT NULL 
     GROUP BY CustomerID
@@ -243,30 +243,31 @@ GROUP BY Loyalty
 */
 
 /*
-Result:
-Loyalty - Binary col of whether loyal customer or not. I have demonstrated that H3 is true - Loyal customers have fewer average days between purchases.
+    Result:
+    Loyalty - Binary col of whether loyal customer or not. I have demonstrated that H3 is true - Loyal customers have fewer average days between purchases.
 
-Loyalty     AvgDayBetweenPurchases
-0	             65.281286628245
-1	             53.301462446130
+    Loyalty     AvgDayBetweenPurchases
+    0	             65.281286628245
+    1	             53.301462446130
 
 */
 
 
-------------------------------------------H4: High-frequency customers tend to purchase fewer items per order but more often.
+------------------------------------------H4: High-frequency customers tend to purchase more items per order but more often.
 
---First, let's define high-frequency as a frequency score of >= 7. 
---Let's find the average number of items per order and then group by high frequency customers vs. low frequency to validate the hypothesis.
-
-
+/*  First, let's define high-frequency as a frequency score of >= 7. 
+    Let's find the average number of items per order and then group by high frequency customers vs. low frequency to validate the hypothesis.
+    Items per order can be calculated as: Total # of Items / Total # of Orders 
+    
+*/
 
 -- Using the same RFM from H3, we can get the frequency scores
 WITH Orders AS (
     SELECT 
         CustomerID,
-        MIN(CAST(InvoiceDate AS DATE)) AS first_purchase,
+        SUM(CAST(Quantity AS INT)) AS Total_Items,
         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
-        COUNT(DISTINCT InvoiceDate) AS Num_orders
+        COUNT(DISTINCT InvoiceNo) AS Num_orders
     FROM dbo.Online_Retail
     WHERE CustomerID IS NOT NULL 
     GROUP BY CustomerID
@@ -275,21 +276,44 @@ WITH Orders AS (
 RFM AS (
     SELECT 
         CustomerID,
+        Num_orders,
         PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
-        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency
+        PERCENT_RANK() OVER (ORDER By Num_orders ASC) * 10 AS Frequency
     FROM Orders
 ),
 
-Avg_Items_Per_Order AS (
+Items_Per_Order AS (
     SELECT 
-        
+        CustomerID,
+        Total_Items * 1.0 / Num_orders AS Items_Per_Order
+    FROM Orders
+),
 
-
-
-
+High_Freq AS (
+    SELECT 
+        CustomerID,
+        CASE WHEN 
+            Frequency >= 7 THEN 1
+            ELSE 0
+            END AS High_Frequency
+    FROM RFM
 )
 
+SELECT
+    High_Frequency,
+    AVG(Items_Per_Order) AS Avg_Items_Per_Order
+FROM High_Freq a
+LEFT JOIN Items_Per_Order b ON a.CustomerID = b.CustomerID
+GROUP BY High_Frequency
 
+/*
+Result:
+    High_Frequency       Avg_Items_Per_Order
+        0	                194.870421106037
+        1	                202.658484534988
+
+We see here that those that are considered high-frequency customers have higher average items per order.
+*/
 
 
 
