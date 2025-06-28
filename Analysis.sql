@@ -15,17 +15,17 @@ H3: The average days between purchases is shorter for loyal customers.
 
 H4: High-frequency customers tend to purchase more items per order but more often.
 
-H5: Customers in Segment X (e.g., RFM 555) increased spending after the campaign.
+H5: Customers with low recency (i.e., who haven't purchased in a long time) are less likely to have high order frequency.
 
-H6: Customers who were emailed are more likely to return within 30 days.
+H6: Customers with higher monetary value in the past tend to place larger orders (more items per order).
 
-H7: Customers who received a discount coupon have higher frequency post-campaign.
+H7: Customers with lower recency scores (i.e., who purchased more recently) tend to have higher frequency of purchases.
 
-H8: Customers who haven’t purchased in 90+ days are unlikely to return.
+H8: At-risk customers (low frequency and low recency) tend to have lower average order size (items per order).
 
-H9: Customers with only 1 purchase have a 70%+ chance of not returning.
+H9: Loyal customers (high frequency and recency) tend to have higher total monetary value.
 
-H10: Customers with low Quantity per Invoice are more likely to churn.
+H10: Customers with infrequent purchase history (low frequency) tend to spend more per order when they do purchase.
 */
 
 
@@ -262,49 +262,49 @@ GROUP BY Loyalty
 */
 
 -- Using the same RFM from H3, we can get the frequency scores
-WITH Orders AS (
-    SELECT 
-        CustomerID,
-        SUM(CAST(Quantity AS INT)) AS Total_Items,
-        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
-        COUNT(DISTINCT InvoiceNo) AS Num_orders
-    FROM dbo.Online_Retail
-    WHERE CustomerID IS NOT NULL 
-    GROUP BY CustomerID
-),
+-- WITH Orders AS (
+--     SELECT 
+--         CustomerID,
+--         SUM(CAST(Quantity AS INT)) AS Total_Items,
+--         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+--         COUNT(DISTINCT InvoiceNo) AS Num_orders
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL 
+--     GROUP BY CustomerID
+-- ),
 
-RFM AS (
-    SELECT 
-        CustomerID,
-        Num_orders,
-        PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
-        PERCENT_RANK() OVER (ORDER By Num_orders ASC) * 10 AS Frequency
-    FROM Orders
-),
+-- RFM AS (
+--     SELECT 
+--         CustomerID,
+--         Num_orders,
+--         PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
+--         PERCENT_RANK() OVER (ORDER By Num_orders ASC) * 10 AS Frequency
+--     FROM Orders
+-- ),
 
-Items_Per_Order AS (
-    SELECT 
-        CustomerID,
-        Total_Items * 1.0 / Num_orders AS Items_Per_Order
-    FROM Orders
-),
+-- Items_Per_Order AS (
+--     SELECT 
+--         CustomerID,
+--         Total_Items * 1.0 / Num_orders AS Items_Per_Order
+--     FROM Orders
+-- ),
 
-High_Freq AS (
-    SELECT 
-        CustomerID,
-        CASE WHEN 
-            Frequency >= 7 THEN 1
-            ELSE 0
-            END AS High_Frequency
-    FROM RFM
-)
+-- High_Freq AS (
+--     SELECT 
+--         CustomerID,
+--         CASE WHEN 
+--             Frequency >= 7 THEN 1
+--             ELSE 0
+--             END AS High_Frequency
+--     FROM RFM
+-- )
 
-SELECT
-    High_Frequency,
-    AVG(Items_Per_Order) AS Avg_Items_Per_Order
-FROM High_Freq a
-LEFT JOIN Items_Per_Order b ON a.CustomerID = b.CustomerID
-GROUP BY High_Frequency
+-- SELECT
+--     High_Frequency,
+--     AVG(Items_Per_Order) AS Avg_Items_Per_Order
+-- FROM High_Freq a
+-- LEFT JOIN Items_Per_Order b ON a.CustomerID = b.CustomerID
+-- GROUP BY High_Frequency
 
 /*
 Result:
@@ -314,6 +314,11 @@ Result:
 
 We see here that those that are considered high-frequency customers have higher average items per order.
 */
+
+
+
+------------------------------------------H5: Customers with low recency (i.e., who haven't purchased in a long time) are less likely to have high order frequency.
+
 
 
 
