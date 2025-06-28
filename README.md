@@ -14,15 +14,16 @@
 Which customers should the company prioritize for a targeted marketing campaign to improve customer retention and maximize revenue over the next 6 months?
 
 
-## The purpose of this project is to identify customers who are at the highest risk of churning to minimize the amount of financial lose and maximize the 
+## The purpose of this project is to identify customers who will provide the highest marginal gain from a marketing campaign 
 
 
 ### Stakeholder Questions
 1. How should we prioritize customers for marketing campaign?
-2. How can we measure whether the campaign improves retention or revenue?
+2. What evidence do we have that certain customer behaviors signal future retention or churn?
 3. How can we tell which customers are likely to stop buying from us soon?
 4. What characteristics do high-rentention vs. low-retention customers have?
 5. Who are our most valuable customers based on their purchasing behavior?
+
 
 # Summary 
 

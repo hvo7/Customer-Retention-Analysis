@@ -1,11 +1,10 @@
 USE Online_Retail;
 
 GO
+
+
 /*
 After performing RFM analysis, we will now use SQL to answer the following hypotheses:
-
-
-************Note that Analysis1 will only work on Hypotheses 1-5. Analysis2.sql will do the other 6-10.
 
 H1: Customers who buy multiple product categories are more likely to return.
 
@@ -13,32 +12,14 @@ H2: Customers who make their first purchase in December have lower retention.
 
 H3: The average days between purchases is shorter for loyal customers.
 
-H4: High-frequency customers tend to purchase more items per order but more often.
+H4: Customers who haven’t purchased in 90+ days are unlikely to return
 
-H5: Customers with low recency (i.e., who haven't purchased in a long time) are less likely to have high order frequency.
-
-H6: Customers with higher monetary value in the past tend to place larger orders (more items per order).
-
-H7: Customers with lower recency scores (i.e., who purchased more recently) tend to have higher frequency of purchases.
-
-H8: At-risk customers (low frequency and low recency) tend to have lower average order size (items per order).
-
-H9: Loyal customers (high frequency and recency) tend to have higher total monetary value.
-
-H10: Customers with infrequent purchase history (low frequency) tend to spend more per order when they do purchase.
+H5: Customers with only one purchase have a high likelihood of churning
 */
-
-
-
-
-
-
 
 
 /*
  ------------------------------H1: Customers who buy multiple product categories are more likely to return.-------------------------------------
-
-
 
 Define retention: Customer has made another purchase within 1 month (30 days) from their original purchase
 Compare the retention of customers with multiple products vs. without multiple products
@@ -140,7 +121,8 @@ GROUP BY Multiple_Product
 
 */
 
------------------------------------------------------------------------ H2: Customers who make their first purchase in December have lower retention.
+-------------------------------------H2: Customers who make their first purchase in December have lower retention.
+
 -- The idea behind this hypothesis is that December shopped are seasonal
 -- Like before, a retained customer retained has repurchased 30+ days after their initial purchase.
 
@@ -253,76 +235,13 @@ GROUP BY Loyalty
 */
 
 
-------------------------------------------H4: High-frequency customers tend to purchase more items per order but more often.
-
-/*  First, let's define high-frequency as a frequency score of >= 7. 
-    Let's find the average number of items per order and then group by high frequency customers vs. low frequency to validate the hypothesis.
-    Items per order can be calculated as: Total # of Items / Total # of Orders 
-    
-*/
-
--- Using the same RFM from H3, we can get the frequency scores
--- WITH Orders AS (
---     SELECT 
---         CustomerID,
---         SUM(CAST(Quantity AS INT)) AS Total_Items,
---         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
---         COUNT(DISTINCT InvoiceNo) AS Num_orders
---     FROM dbo.Online_Retail
---     WHERE CustomerID IS NOT NULL 
---     GROUP BY CustomerID
--- ),
-
--- RFM AS (
---     SELECT 
---         CustomerID,
---         Num_orders,
---         PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
---         PERCENT_RANK() OVER (ORDER By Num_orders ASC) * 10 AS Frequency
---     FROM Orders
--- ),
-
--- Items_Per_Order AS (
---     SELECT 
---         CustomerID,
---         Total_Items * 1.0 / Num_orders AS Items_Per_Order
---     FROM Orders
--- ),
-
--- High_Freq AS (
---     SELECT 
---         CustomerID,
---         CASE WHEN 
---             Frequency >= 7 THEN 1
---             ELSE 0
---             END AS High_Frequency
---     FROM RFM
--- )
-
--- SELECT
---     High_Frequency,
---     AVG(Items_Per_Order) AS Avg_Items_Per_Order
--- FROM High_Freq a
--- LEFT JOIN Items_Per_Order b ON a.CustomerID = b.CustomerID
--- GROUP BY High_Frequency
-
-/*
-Result:
-    High_Frequency       Avg_Items_Per_Order
-        0	                194.870421106037
-        1	                202.658484534988
-
-We see here that those that are considered high-frequency customers have higher average items per order.
-*/
-
-
-
-------------------------------------------H5: Customers with low recency (i.e., who haven't purchased in a long time) are less likely to have high order frequency.
+--H4: Customers who haven’t purchased in 90+ days are unlikely to return
 
 
 
 
 
+--H5: Customers with only one purchase have a high likelihood of churning
 
 
 
