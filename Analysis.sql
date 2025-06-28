@@ -1,11 +1,11 @@
 USE Online_Retail;
 
 GO
-
-
-
 /*
 After performing RFM analysis, we will now use SQL to answer the following hypotheses:
+
+
+************Note that Analysis1 will only work on Hypotheses 1-5. Analysis2.sql will do the other 6-10.
 
 H1: Customers who buy multiple product categories are more likely to return.
 
@@ -27,6 +27,11 @@ H9: Customers with only 1 purchase have a 70%+ chance of not returning.
 
 H10: Customers with low Quantity per Invoice are more likely to churn.
 */
+
+
+
+
+
 
 
 
@@ -196,6 +201,7 @@ Fixed by Casting InvoiceDate explicitly as DATE.
 
 */
 
+/*
 WITH Orders AS (
     SELECT 
         CustomerID,
@@ -234,7 +240,7 @@ SELECT
     AVG(DATEDIFF(day, first_purchase, recent_purchase) * 1.0 / NULLIF(Num_orders - 1,0)) AS AvgDayBetweenPurchase
 FROM Loyalty
 GROUP BY Loyalty  
-
+*/
 
 /*
 Result:
@@ -247,7 +253,54 @@ Loyalty     AvgDayBetweenPurchases
 */
 
 
-------------------------------------------
+------------------------------------------H4: High-frequency customers tend to purchase fewer items per order but more often.
+
+--First, let's define high-frequency as a frequency score of >= 7. 
+--Let's find the average number of items per order and then group by high frequency customers vs. low frequency to validate the hypothesis.
+
+
+
+-- Using the same RFM from H3, we can get the frequency scores
+WITH Orders AS (
+    SELECT 
+        CustomerID,
+        MIN(CAST(InvoiceDate AS DATE)) AS first_purchase,
+        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+        COUNT(DISTINCT InvoiceDate) AS Num_orders
+    FROM dbo.Online_Retail
+    WHERE CustomerID IS NOT NULL 
+    GROUP BY CustomerID
+),
+
+RFM AS (
+    SELECT 
+        CustomerID,
+        PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
+        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency
+    FROM Orders
+),
+
+Avg_Items_Per_Order AS (
+    SELECT 
+        
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
