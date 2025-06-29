@@ -170,125 +170,164 @@ I will need future data in order to prove whether customers who haven't purchase
 We see here that high frequency customers have signficantly  less average churn rate.
 */
 
-WITH Max_Date AS (
-    SELECT 
-        MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
-    FROM dbo.Online_Retail
-),
 
-Orders AS (
-    SELECT 
-        CustomerID,
-        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
-        COUNT(Distinct InvoiceNo) AS Num_orders,
-        SUM(Revenue) AS Total_Revenue
-    FROM dbo.Online_Retail
-    WHERE CustomerID IS NOT NULL AND Revenue > 0
-    GROUP BY CustomerID
-),
+------------H4: Customers with high total spend are more likely to stay.------------
+-- Let's define high spenders as those with a monetary value >= 7 (from RFM analysis)
 
-Churn_Check AS (
-    SELECT 
-        CustomerID,
-        DATEDIFF(DAY, recent_purchase, Analysis_Date) AS Days_Since_Purchase,
-        CASE WHEN 
-            DATEDIFF(DAY, recent_purchase, Analysis_Date) >= 90 THEN 1.0
-            ELSE 0.0
-        END AS Churned
-    FROM Orders 
-    CROSS JOIN Max_Date
-),
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
 
-RFM AS (
-    SELECT 
-        CustomerID,
-        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency,
-        PERCENT_RANK() OVER (ORDER BY Total_Revenue ASC) * 10 AS Monetary
-    FROM Orders
-),
+-- Orders AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+--         COUNT(Distinct InvoiceNo) AS Num_orders,
+--         ROUND(SUM(Revenue),2) AS Total_Revenue
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL AND Revenue > 0
+--     GROUP BY CustomerID
+-- ),
 
-High_Spender AS (
-    SELECT 
-        a.CustomerID,
-        CASE WHEN
-            Monetary >= 7 THEN 1
-            ELSE 0
-        END AS High_Spender
-    FROM RFM a
-    LEFT JOIN Orders b ON a.CustomerID = b.CustomerID 
-)
+-- Churn_Check AS (
+--     SELECT 
+--         CustomerID,
+--         DATEDIFF(DAY, recent_purchase, Analysis_Date) AS Days_Since_Purchase,
+--         CASE WHEN 
+--             DATEDIFF(DAY, recent_purchase, Analysis_Date) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS Churned
+--     FROM Orders 
+--     CROSS JOIN Max_Date
+-- ),
 
-SELECT 
-    High_Spender,
-    AVG(Churned) AS Avg_Churned
-FROM Orders a
-LEFT JOIN High_Spender b ON a.CustomerID = b.CustomerID
-LEFT JOIN Churn_Check c ON a.CustomerID = c.CustomerID
-GROUP BY High_Spender
+-- RFM AS (
+--     SELECT 
+--         CustomerID,
+--         PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency,
+--         PERCENT_RANK() OVER (ORDER BY Total_Revenue ASC) * 10 AS Monetary
+--     FROM Orders
+-- ),
 
------------------------------------------------H?: The average days between purchases is shorter for loyal customers.
-/*
-Using RFM analysis, I will define a "loyal customer" as someone who falls under the top 70% of Recency and top 30% of Frequency. 
-Although I already did RFM analysis in excel, we wil use SQL as well to do this.
+-- High_Spender AS (
+--     SELECT 
+--         a.CustomerID,
+--         CASE WHEN
+--             Monetary >= 7 THEN 1
+--             ELSE 0
+--         END AS High_Spender
+--     FROM RFM a
+--     LEFT JOIN Orders b ON a.CustomerID = b.CustomerID 
+-- )
 
-* Encoutered issue where SQL interepreted InvoiceDate as dd/mm/yyyy rather than mm/dd/yyyy, which led to 8/2/2011 being more recent than 12/7/2011 - Incorrect.
-Problem initially identified when comparing RFM analysis on SQL with RFM on Excel.
-
-Fixed by Casting InvoiceDate explicitly as DATE. 
-
-
-*/
-
-/*
-WITH Orders AS (
-    SELECT 
-        CustomerID,
-        MIN(CAST(InvoiceDate AS DATE)) AS first_purchase,
-        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
-        COUNT(DISTINCT InvoiceNo) AS Num_orders
-    FROM dbo.Online_Retail
-    WHERE CustomerID IS NOT NULL 
-    GROUP BY CustomerID
-),
-
-RFM AS (
-    SELECT 
-        CustomerID,
-        PERCENT_RANK() OVER (ORDER BY recent_purchase ASC) * 10 AS Recency,
-        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency
-    FROM Orders
-),
-
-Loyalty AS (
-    SELECT 
-    O.CustomerID,
-    first_purchase,
-    recent_purchase,
-    Num_orders,
-    CASE WHEN 
-        Recency >= 7 AND Frequency >= 3 THEN 1
-        ELSE 0
-    END AS Loyalty
-FROM Orders O 
-LEFT JOIN RFM R ON O.CustomerID = R.CustomerID
-)
-
-SELECT 
-    Loyalty,
-    AVG(DATEDIFF(day, first_purchase, recent_purchase) * 1.0 / NULLIF(Num_orders - 1,0)) AS AvgDayBetweenPurchase
-FROM Loyalty
-GROUP BY Loyalty  
-*/
+-- SELECT 
+--     High_Spender,
+--     AVG(Churned) AS Avg_Churned
+-- FROM Orders a
+-- LEFT JOIN High_Spender b ON a.CustomerID = b.CustomerID
+-- LEFT JOIN Churn_Check c ON a.CustomerID = c.CustomerID
+-- GROUP BY High_Spender
 
 /*
     Result:
-    Loyalty - Binary col of whether loyal customer or not. I have demonstrated that H3 is true - Loyal customers have fewer average days between purchases.
+            High_Spender        Avg_Churned
+                    0	         0.430688
+                    1	         0.108378
 
-    Loyalty     AvgDayBetweenPurchases
-    0	             65.281286628245
-    1	             53.301462446130
-
+We see here that those that are high spenders have less average churn rate.
 */
+
+
+
+
+
+
+
+
+--------------H5: Customers who previously churned are more likely to churn again.----------
+-- Again, define churn as inactivity for 90+ days. First, we identify whether a customer has ever churned before. Then we compare that with the final possible churn 
+-- of 90+ days from our analysis_date
+
+WITH Purchases AS (
+    SELECT 
+        CustomerID,
+        CAST(InvoiceDate AS DATE) AS PurchaseDate,
+        LAG(CAST(InvoiceDate AS DATE)) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Prev_Order
+    FROM dbo.Online_Retail
+    WHERE CustomerID IS NOT NULL
+),
+
+Date_Between_Purchases AS (
+    SELECT
+        CustomerID,
+        PurchaseDate,
+        DATEDIFF(DAY, PurchaseDate, Prev_Order) AS Days_From_Prev,
+        CASE WHEN 
+            DATEDIFF(DAY, Prev_Order, PurchaseDate) >= 90 THEN 1.0
+            ELSE 0.0
+        END AS Churn_Flag
+    FROM Purchases
+),
+
+Customer_Churn AS (
+    SELECT
+        CustomerID,
+        MAX(CAST(PurchaseDate AS DATE)) AS most_recent_purchase,
+        Sum(Churn_Flag) AS Num_Churn,
+        MAX(Churn_Flag) AS Prev_Churn
+    FROM Date_Between_Purchases
+    GROUP BY CustomerID
+),
+
+Max_Date AS (
+    SELECT
+        Max(InvoiceDate) AS Analysis_Date
+    FROM dbo.Online_Retail
+),
+
+Recurring_Churn AS (
+    SELECT 
+        CustomerID,
+        Prev_Churn,
+        CASE WHEN
+            DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90 THEN 1.0
+            ELSE 0.0
+        END AS final_churn
+        FROM Customer_Churn
+        CROSS JOIN Max_Date
+)
+
+SELECT 
+    Prev_Churn,
+    AVG(final_churn) AS Avg_Churned
+FROM Recurring_Churn
+GROUP BY Prev_Churn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------
 /*   Problems I encountered in the dataset or way it transferred
