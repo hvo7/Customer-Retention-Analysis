@@ -24,7 +24,6 @@ Which customers should the company prioritize for a targeted marketing campaign 
 4. What characteristics do high-rentention vs. low-retention customers have?
 5. Who are our most valuable customers based on their purchasing behavior?
 
-
 # Summary 
 
 # Introduction
@@ -39,11 +38,23 @@ The assumptions for RFM Analysis is that:
 2. Frequent Buyers tend to be loyal customers
 3. High Spenders result in a higher ROI to retain - Useful when targeting not only <u> loyal </u> but also <u> high-value </u> customers
 
-
 I also quantified the company's overall customer retention using 3 primary metrics:
 * Customer Retention Rate (CRR)
 * Customer Churn Rate 
 * Repeated Purchase Rate (RPR)
+
+# SQL Analysis
+By validating the following key hypotheses, I aim to gain better insight into customer behavior to help distinguish valuable customers. 
+
+H1: Customers who buy multiple product categories are more likely to return.
+
+H2: Customers who make their first purchase in December have lower retention.
+
+H3: The average days between purchases is shorter for loyal customers.
+
+H4: Customers who haven’t purchased in 90+ days are unlikely to return
+
+H5: Customers with only one purchase have a high likelihood of churning
 
 # Dashboard
 

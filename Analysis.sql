@@ -235,29 +235,100 @@ GROUP BY Loyalty
 */
 
 
---H4: Customers who haven’t purchased in 90+ days are unlikely to return
+-----------------------H4: Customers who haven’t purchased in 90+ days are unlikely to return----------------------
+/* 
+Identify customers who haven't purchased in 90+ days as a proxy for churn.
+This isn't definitive proof that they are lost customers but are still high-risk. 
+I will need future data in order to prove whether customers who haven't purchased in 90+ days have truly churned. 
+
+*/
+
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
+
+-- Recent_Purchase AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(InvoiceDate) AS most_recent_purchase
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL
+--     GROUP BY CustomerID
+-- )
+
+-- SELECT 
+--     a.CustomerID,
+--     a.most_recent_purchase,
+--     DATEDIFF(DAY, most_recent_purchase, Analysis_Date) AS Days_Since_Last_Purchase
+--     FROM Recent_Purchase a
+--     CROSS JOIN Max_Date
+--     WHERE DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90
+--     ORDER BY Days_Since_Last_Purchase DESC
+
+
+------------------------H5: Customers with only one purchase have a high likelihood of churning---------------------
+
+--I will specifically perform snapshot-based churn calculations
+--First let's define a customer as "churned" if they haven't purchased at least 90 days before the final date of analysis.
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
+
+-- One_Purchase AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(CAST(InvoiceDate AS DATE)) AS Most_Recent_Purchase,
+--         CASE WHEN 
+--             COUNT(DISTINCT InvoiceNo) = 1 THEN 1
+--             ELSE 0
+--             END AS One_Purchase_Buyer
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL 
+--     GROUP BY CustomerID
+-- ),
+
+-- Churn_Check AS (
+--     SELECT
+--         CustomerID,
+--         One_Purchase_Buyer,
+--         Most_Recent_Purchase,
+--         DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) AS Days_Since_Purchase,
+--         CASE WHEN 
+--             DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS Churned
+--     FROM One_Purchase a
+--     CROSS JOIN Max_Date b
+-- )
+
+-- SELECT
+--     One_Purchase_Buyer,
+--     AVG(Churned) AS Churn_Rate
+-- FROM Churn_Check
+-- GROUP BY One_Purchase_Buyer
+
+/*
+    Result:
+    One_Purchase_Buyer          Churn_Rate
+            0	                 0.231448
+            1	                 0.568164
+
+We can see that customers that have only purchased once have a higher churn rate than customers who have multiple purchases.
+*/
 
 
 
 
 
---H5: Customers with only one purchase have a high likelihood of churning
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
--------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
 /*   Problems I encountered in the dataset or way it transferred
 
 
