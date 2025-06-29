@@ -6,171 +6,227 @@ GO
 /*
 After performing RFM analysis, we will now use SQL to answer the following hypotheses:
 
-H1: Customers who buy multiple product categories are more likely to return.
+H1: One-time buyers are more likely to churn.
 
-H2: Customers who make their first purchase in December have lower retention.
+H2: Customers who haven’t purchased in 90+ days are unlikely to return
 
 H3: The average days between purchases is shorter for loyal customers.
 
-H4: Customers who haven’t purchased in 90+ days are unlikely to return
+H4: Customers with high total spend are more likely to stay.
 
-H5: Customers with only one purchase have a high likelihood of churning
+H5: Customers who previously churned are more likely to churn again.
 */
 
 
 /*
- ------------------------------H1: Customers who buy multiple product categories are more likely to return.-------------------------------------
+ ------------------------------H1: One-time buyers are more likely to churn-------------------------------------
 
-Define retention: Customer has made another purchase within 1 month (30 days) from their original purchase
-Compare the retention of customers with multiple products vs. without multiple products
-Multiple products definition: >= 16 distinct products
-
--- Determine how many distinct products the bottom 30% of customers have. 
--- Customers ranked by how many distinct products they have - Ex: Top 99% has 1000 products (most). Bottom 1% has 1 distinct product
-
--- WITH Product_Counts AS (
--- SELECT 
---     CustomerID, 
---     COUNT(DISTINCT(Description)) AS Unique_Products
--- FROM dbo.Online_Retail
--- WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 -- Remove empty strings and nulls
--- GROUP BY CustomerID
+--I will specifically perform snapshot-based churn calculations
+--First let's define a customer as "churned" if they haven't purchased at least 90 days before the final date of analysis.
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
 -- ),
--- Rank_Customers AS (
---     SELECT *,
---         Percent_Rank() OVER (ORDER BY Unique_Products ASC ) AS Percent_Rank
---     FROM Product_Counts
+
+-- One_Purchase AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(CAST(InvoiceDate AS DATE)) AS Most_Recent_Purchase,
+--         CASE WHEN 
+--             COUNT(DISTINCT InvoiceNo) = 1 THEN 1
+--             ELSE 0
+--             END AS One_Purchase_Buyer
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL 
+--     GROUP BY CustomerID
+-- ),
+
+-- Churn_Check AS (
+--     SELECT
+--         CustomerID,
+--         One_Purchase_Buyer,
+--         Most_Recent_Purchase,
+--         DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) AS Days_Since_Purchase,
+--         CASE WHEN 
+--             DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS Churned
+--     FROM One_Purchase a
+--     CROSS JOIN Max_Date b
 -- )
--- SELECT MAX(Unique_Products) AS Bottom30
--- FROM Rank_Customers
--- WHERE Percent_Rank <= 0.3;
 
+-- SELECT
+--     One_Purchase_Buyer,
+--     AVG(Churned) AS Churn_Rate
+-- FROM Churn_Check
+-- GROUP BY One_Purchase_Buyer
 
+/*
+    Result:
+    One_Purchase_Buyer          Churn_Rate
+            0	                 0.231448
+            1	                 0.568164
 
--- Multiple products definition: >= 16 distinct products
---Include multiple products column
-WITH Product_Counts AS (
-    SELECT 
-        CustomerID, 
-        COUNT(DISTINCT(Description)) AS Unique_Products
-    FROM dbo.Online_Retail
-    WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL-- Remove empty strings and nulls
-    GROUP BY CustomerID
-),
+We can see that customers that have only purchased once have a higher churn rate than customers who have multiple purchases.
+*/  
 
-MultipleProduct AS (
-    SELECT
-        CustomerID,
-        CASE WHEN 
-            Unique_Products >= 16 THEN 1
-            ELSE 0
-        END AS Multiple_Product
-    FROM Product_Counts
-),
-
--- Include Retention
-PurchaseSpan AS (
-    SELECT 
-        CustomerID,
-        MAX(InvoiceDate) AS first_purchase,
-        MIN(InvoiceDate) AS recent_purchase
-    FROM dbo.Online_Retail
-    WHERE Description IS NOT NULL AND LEN(TRIM(Description)) > 0 AND CustomerID IS NOT NULL
-    GROUP BY CustomerID
-),
-
-Retained AS (
-    SELECT 
-        CustomerID,
-        CASE WHEN
-            DATEDIFF(day,first_purchase, recent_purchase) >= 30 THEN 1
-            ELSE 0
-        END AS Retained
-    FROM PurchaseSpan
-),
-
--- Combine into one query:
--- CustomerID with 2 binary columns: 
--- 1) label 1 if considered multiple product customer (>=16) 
--- 2) label 1 if considered retained (purchase within 30 days from initial)
-
-Combined AS (
-    SELECT
-        T.CustomerID,
-        a.Multiple_Product,
-        b.Retained
-    FROM dbo.Online_Retail T
-    LEFT JOIN MultipleProduct a ON T.CustomerID = a.CustomerID
-    LEFT JOIN Retained b ON T.CustomerID = b.CustomerID
-)
-
-SELECT
-    Multiple_Product,
-    AVG(CAST(Retained AS FLOAT)) AS Retention_Rate
-FROM Combined
-GROUP BY Multiple_Product
-
-    /*Result:
-
-    Multiple _Product         Retention Rate
-        0	                0.10345541071798055
-        1	                0.4888117183968118
-
-    We see here that customers who order multiple products indeed have a higher retention rate.
-    */
+-----------------------H2: Customers who haven’t purchased in 90+ days are unlikely to return----------------------
+/* 
+Identify customers who haven't purchased in 90+ days as a proxy for churn.
+This isn't definitive proof that they are lost customers but are still high-risk. 
+I will need future data in order to prove whether customers who haven't purchased in 90+ days have truly churned. 
 
 */
 
--------------------------------------H2: Customers who make their first purchase in December have lower retention.
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
 
--- The idea behind this hypothesis is that December shopped are seasonal
--- Like before, a retained customer retained has repurchased 30+ days after their initial purchase.
+-- Recent_Purchase AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(InvoiceDate) AS most_recent_purchase
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL
+--     GROUP BY CustomerID
+-- )
+
+-- SELECT 
+--     a.CustomerID,
+--     a.most_recent_purchase,
+--     DATEDIFF(DAY, most_recent_purchase, Analysis_Date) AS Days_Since_Last_Purchase
+--     FROM Recent_Purchase a
+--     CROSS JOIN Max_Date
+--     WHERE DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90
+--     ORDER BY Days_Since_Last_Purchase DESC
+*/
+
+---------------------------H3: Frequent buyers are less likely to churn-------
+
+-- WITH Max_Date AS (
+--     SELECT 
+--         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
+
+-- Orders AS (
+--     SELECT 
+--         CustomerID,
+--         MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+--         COUNT(Distinct InvoiceNo) AS Num_orders
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL 
+--     GROUP BY CustomerID
+-- ),
+
+-- Churn_Check AS (
+--     SELECT 
+--         CustomerID,
+--         DATEDIFF(DAY, recent_purchase, Analysis_Date) AS Days_Since_Purchase,
+--         CASE WHEN 
+--             DATEDIFF(DAY, recent_purchase, Analysis_Date) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS Churned
+--     FROM Orders 
+--     CROSS JOIN Max_Date
+-- ),
+
+-- RFM AS (
+--     SELECT 
+--         CustomerID,
+--         PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency
+--     FROM Orders
+-- ),
+
+-- High_Frequent_Buyers AS (
+--     SELECT 
+--         a.CustomerID,
+--         CASE WHEN
+--             Frequency >= 7 THEN 1
+--             ELSE 0
+--         END AS High_Frequency_Buyers
+--     FROM RFM a
+--     LEFT JOIN Orders b ON a.CustomerID = b.CustomerID 
+-- )
+
+-- SELECT 
+--     High_Frequency_Buyers,
+--     AVG(Churned) AS Avg_Churned
+-- FROM Orders a
+-- LEFT JOIN High_Frequent_Buyers b ON a.CustomerID = b.CustomerID
+-- LEFT JOIN Churn_Check c ON a.CustomerID = c.CustomerID
+-- GROUP BY High_Frequency_Buyers
 
 /*
-WITH Purchases AS (
+    Result:
+
+    High_Frequent_Buyers        Avg_Churned
+            0	                 0.420091
+            1	                 0.068077
+
+We see here that high frequency customers have signficantly  less average churn rate.
+*/
+
+WITH Max_Date AS (
+    SELECT 
+        MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
+    FROM dbo.Online_Retail
+),
+
+Orders AS (
     SELECT 
         CustomerID,
-        MIN(InvoiceDate) AS First_Purchase,
-        MAX(InvoiceDate) AS Last_Purchase
+        MAX(CAST(InvoiceDate AS DATE))  AS recent_purchase,
+        COUNT(Distinct InvoiceNo) AS Num_orders,
+        SUM(Revenue) AS Total_Revenue
     FROM dbo.Online_Retail
+    WHERE CustomerID IS NOT NULL AND Revenue > 0
     GROUP BY CustomerID
 ),
 
-Retention AS (
+Churn_Check AS (
     SELECT 
         CustomerID,
+        DATEDIFF(DAY, recent_purchase, Analysis_Date) AS Days_Since_Purchase,
         CASE WHEN 
-            DATEDIFF(day, First_Purchase, Last_Purchase) >= 30 THEN 1
-            ELSE 0
-        END AS Retained,
+            DATEDIFF(DAY, recent_purchase, Analysis_Date) >= 90 THEN 1.0
+            ELSE 0.0
+        END AS Churned
+    FROM Orders 
+    CROSS JOIN Max_Date
+),
 
+RFM AS (
+    SELECT 
+        CustomerID,
+        PERCENT_RANK() OVER (Order By Num_orders ASC) * 10 AS Frequency,
+        PERCENT_RANK() OVER (ORDER BY Total_Revenue ASC) * 10 AS Monetary
+    FROM Orders
+),
+
+High_Spender AS (
+    SELECT 
+        a.CustomerID,
         CASE WHEN
-            Month(First_Purchase) = 12 AND Year(First_Purchase) = 2010 THEN 1
+            Monetary >= 7 THEN 1
             ELSE 0
-        END AS Dec_First_Purchase
-    FROM Purchases
-    WHERE NOT (Month(First_Purchase) = 12 AND Year(First_Purchase) = 2011) --We dont have Jan 2012, to correctly identify 1 month retention, so we can only use Dec 2010
+        END AS High_Spender
+    FROM RFM a
+    LEFT JOIN Orders b ON a.CustomerID = b.CustomerID 
 )
 
 SELECT 
-    Dec_First_Purchase,
-    AVG(CAST(Retained AS FLOAT)) AS Retention_Rate
-FROM Retention 
-GROUP BY Dec_First_Purchase
-*/
+    High_Spender,
+    AVG(Churned) AS Avg_Churned
+FROM Orders a
+LEFT JOIN High_Spender b ON a.CustomerID = b.CustomerID
+LEFT JOIN Churn_Check c ON a.CustomerID = c.CustomerID
+GROUP BY High_Spender
 
-
-/*
-Result:
-Dec First Purchase             Retention Rate
-        0	                  0.2898916057474162
-        1	                  0.5616438356164384
-
-We see here that those who actually purchase in december have a higher retention rate than those who do not. This could mean that the products purchased may 
-not be correlated speficially with seasonality (Christmas or gift-giving)
-*/
-
------------------------------------------------H3: The average days between purchases is shorter for loyal customers.
+-----------------------------------------------H?: The average days between purchases is shorter for loyal customers.
 /*
 Using RFM analysis, I will define a "loyal customer" as someone who falls under the top 70% of Recency and top 30% of Frequency. 
 Although I already did RFM analysis in excel, we wil use SQL as well to do this.
@@ -234,100 +290,6 @@ GROUP BY Loyalty
 
 */
 
-
------------------------H4: Customers who haven’t purchased in 90+ days are unlikely to return----------------------
-/* 
-Identify customers who haven't purchased in 90+ days as a proxy for churn.
-This isn't definitive proof that they are lost customers but are still high-risk. 
-I will need future data in order to prove whether customers who haven't purchased in 90+ days have truly churned. 
-
-*/
-
--- WITH Max_Date AS (
---     SELECT 
---         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
---     FROM dbo.Online_Retail
--- ),
-
--- Recent_Purchase AS (
---     SELECT 
---         CustomerID,
---         MAX(InvoiceDate) AS most_recent_purchase
---     FROM dbo.Online_Retail
---     WHERE CustomerID IS NOT NULL
---     GROUP BY CustomerID
--- )
-
--- SELECT 
---     a.CustomerID,
---     a.most_recent_purchase,
---     DATEDIFF(DAY, most_recent_purchase, Analysis_Date) AS Days_Since_Last_Purchase
---     FROM Recent_Purchase a
---     CROSS JOIN Max_Date
---     WHERE DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90
---     ORDER BY Days_Since_Last_Purchase DESC
-
-
-------------------------H5: Customers with only one purchase have a high likelihood of churning---------------------
-
---I will specifically perform snapshot-based churn calculations
---First let's define a customer as "churned" if they haven't purchased at least 90 days before the final date of analysis.
--- WITH Max_Date AS (
---     SELECT 
---         MAX(CAST(InvoiceDate AS Date)) AS Analysis_Date
---     FROM dbo.Online_Retail
--- ),
-
--- One_Purchase AS (
---     SELECT 
---         CustomerID,
---         MAX(CAST(InvoiceDate AS DATE)) AS Most_Recent_Purchase,
---         CASE WHEN 
---             COUNT(DISTINCT InvoiceNo) = 1 THEN 1
---             ELSE 0
---             END AS One_Purchase_Buyer
---     FROM dbo.Online_Retail
---     WHERE CustomerID IS NOT NULL 
---     GROUP BY CustomerID
--- ),
-
--- Churn_Check AS (
---     SELECT
---         CustomerID,
---         One_Purchase_Buyer,
---         Most_Recent_Purchase,
---         DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) AS Days_Since_Purchase,
---         CASE WHEN 
---             DATEDIFF(DAY, Most_Recent_Purchase, Analysis_Date) >= 90 THEN 1.0
---             ELSE 0.0
---         END AS Churned
---     FROM One_Purchase a
---     CROSS JOIN Max_Date b
--- )
-
--- SELECT
---     One_Purchase_Buyer,
---     AVG(Churned) AS Churn_Rate
--- FROM Churn_Check
--- GROUP BY One_Purchase_Buyer
-
-/*
-    Result:
-    One_Purchase_Buyer          Churn_Rate
-            0	                 0.231448
-            1	                 0.568164
-
-We can see that customers that have only purchased once have a higher churn rate than customers who have multiple purchases.
-*/
-
-
-
-
-
-
-
-
-
 ------------------------------------------------------------------------------------------------------------------
 /*   Problems I encountered in the dataset or way it transferred
 
@@ -342,6 +304,7 @@ WHERE Description IS NOT NULL AND LEN(Description) <> DATALENGTH(Description)
 --------
 Solution: 
 Replace all the tabs, non-breaking space, etc. with empty space so that TRIM works 
+
 UPDATE dbo.Online_Retail
 SET Description = 
 REPLACE(
@@ -358,7 +321,12 @@ WHERE Description IS NOT NULL
 
 */
 
-/* P2: we see a big problem in the way the data transferred into mssql. it all shifted to the right by one value. 
+
+
+
+
+/*      P2: we see a big problem in the way the data transferred into mssql. it all shifted to the right by one value. 
+
                 InvoiceNo   StockCode            Description                    Quantity         InvoiceDate     UnitPrice CustomerID            Country
      Bad Row Ex: 536381	        82567	    "AIRLINE LOUNGE	METAL SIGN"	            2	               12/1/2010        9:41	2.1	            15311,United Kingdom
 
@@ -372,4 +340,20 @@ WHERE TRY_CONVERT(DATETIME, [InvoiceDate]) IS NULL
 
 Solution:
 Replaced commas in the Description column with ";" done in excel -> retransferred the db
- */
+
+*/
+
+
+
+
+
+/*         P3: Need a Revenue column that is simply Quantity * Unit Price for each order
+
+ALTER TABLE dbo.Online_Retail
+ADD Revenue AS ROUND(CAST(Quantity AS FLOAT) * CAST(UnitPrice AS FLOAT),2)
+
+Solution: Simply add a new column for revenue.
+
+*/
+
+
