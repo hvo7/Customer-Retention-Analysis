@@ -250,62 +250,71 @@ We see here that those that are high spenders have less average churn rate.
 -- Again, define churn as inactivity for 90+ days. First, we identify whether a customer has ever churned before. Then we compare that with the final possible churn 
 -- of 90+ days from our analysis_date
 
-WITH Purchases AS (
-    SELECT 
-        CustomerID,
-        CAST(InvoiceDate AS DATE) AS PurchaseDate,
-        LAG(CAST(InvoiceDate AS DATE)) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Prev_Order
-    FROM dbo.Online_Retail
-    WHERE CustomerID IS NOT NULL
-),
+-- WITH Purchases AS (
+--     SELECT 
+--         CustomerID,
+--         CAST(InvoiceDate AS DATE) AS PurchaseDate,
+--         LAG(CAST(InvoiceDate AS DATE)) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Prev_Order
+--     FROM dbo.Online_Retail
+--     WHERE CustomerID IS NOT NULL
+-- ),
 
-Date_Between_Purchases AS (
-    SELECT
-        CustomerID,
-        PurchaseDate,
-        DATEDIFF(DAY, PurchaseDate, Prev_Order) AS Days_From_Prev,
-        CASE WHEN 
-            DATEDIFF(DAY, Prev_Order, PurchaseDate) >= 90 THEN 1.0
-            ELSE 0.0
-        END AS Churn_Flag
-    FROM Purchases
-),
+-- Date_Between_Purchases AS (
+--     SELECT
+--         CustomerID,
+--         PurchaseDate,
+--         DATEDIFF(DAY, PurchaseDate, Prev_Order) AS Days_From_Prev,
+--         CASE WHEN 
+--             DATEDIFF(DAY, Prev_Order, PurchaseDate) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS Churn_Flag
+--     FROM Purchases
+-- ),
 
-Customer_Churn AS (
-    SELECT
-        CustomerID,
-        MAX(CAST(PurchaseDate AS DATE)) AS most_recent_purchase,
-        Sum(Churn_Flag) AS Num_Churn,
-        MAX(Churn_Flag) AS Prev_Churn
-    FROM Date_Between_Purchases
-    GROUP BY CustomerID
-),
+-- Customer_Churn AS (
+--     SELECT
+--         CustomerID,
+--         MAX(CAST(PurchaseDate AS DATE)) AS most_recent_purchase,
+--         Sum(Churn_Flag) AS Num_Churn,
+--         MAX(Churn_Flag) AS Prev_Churn
+--     FROM Date_Between_Purchases
+--     GROUP BY CustomerID
+-- ),
 
-Max_Date AS (
-    SELECT
-        Max(InvoiceDate) AS Analysis_Date
-    FROM dbo.Online_Retail
-),
+-- Max_Date AS (
+--     SELECT
+--         Max(InvoiceDate) AS Analysis_Date
+--     FROM dbo.Online_Retail
+-- ),
 
-Recurring_Churn AS (
-    SELECT 
-        CustomerID,
-        Prev_Churn,
-        CASE WHEN
-            DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90 THEN 1.0
-            ELSE 0.0
-        END AS final_churn
-        FROM Customer_Churn
-        CROSS JOIN Max_Date
-)
+-- Recurring_Churn AS (
+--     SELECT 
+--         CustomerID,
+--         Prev_Churn,
+--         CASE WHEN
+--             DATEDIFF(DAY, most_recent_purchase, Analysis_Date) >= 90 THEN 1.0
+--             ELSE 0.0
+--         END AS final_churn
+--         FROM Customer_Churn
+--         CROSS JOIN Max_Date
+-- )
 
-SELECT 
-    Prev_Churn,
-    AVG(final_churn) AS Avg_Churned
-FROM Recurring_Churn
-GROUP BY Prev_Churn
+-- SELECT 
+--     Prev_Churn,
+--     AVG(final_churn) AS Avg_Churned
+-- FROM Recurring_Churn
+-- GROUP BY Prev_Churn
 
+/*
+    Result:
+    Prev_Churn                  Avg_Churned
+        0.0	                     0.265993
+        1.0	                     0.051355
 
+We see here that the hypothesis is not supported. Those who have churned previously have less churn rate on average than those who have never churned.
+Of course, this doesn't completely disprove the hypothesis and would require further evidence to solidly invalidate the hypothesis.
+
+*/
 
 
 
