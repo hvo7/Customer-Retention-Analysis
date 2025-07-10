@@ -62,6 +62,36 @@ H5: Customers with only one purchase have a high likelihood of churning
 
 # Dashboard
 
+Page 1 - answers the following questions regarding overall customer retention and churn by visualizing the data:
+
+* How many customers are we losing each month?
+    - First, a customer is considered "lost" if they have not purchased in 90+ days. 
+
+* Is churn increasing or decreasing over time?
+
+* What’s our overall churn rate? What’s a "normal" churn rate for our business?
+
+* Are we retaining our most valuable customers or losing them?
+
+* What’s the average time between purchases for retained vs. churned customers?
+
+* Do one-time buyers make up the bulk of our churn?
+
+* What countries (or segments) show the highest churn rates?
+
+
+Page 2 - Digs deeper and answers the question of "Which customers should we target?"
+
+* Who are our most at-risk customers right now?
+
+* What behaviors do these at-risk customers have in common?
+
+* Are these high-value or low-value customers?
+
+* Can we segment them further (e.g., by geography, recency, or frequency)?
+
+* What retention levers should we consider (discount, loyalty perks, email nudge)?
+
 
 # Recommendations
 

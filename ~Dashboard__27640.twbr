@@ -1,0 +1,562 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20252.25.0514.2217                               -->
+<workbook original-version='18.1' source-build='2025.2.0 (20252.25.0514.2217)' source-platform='win' version='18.1' xml:base='https://localhost' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location derived-from='https://haproxy-traffic-splitter/workbooks/CustomerRetentionRatePerMonth?rev=1.0' id='CustomerRetentionRatePerMonth' path='/workbooks' revision='1.0' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Retention PM (Data_Visualization)' inline='true' name='federated.0vx26g718my1pl0zv3ajn1ilf4s3' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Data_Visualization' name='excel-direct.1d4am6u1rvr90x0zyx6vp0a0epg0'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/henry/OneDrive/Personal Career/Personal Projects/Customer Retention Analysis/Customer-Retention-Analysis/Data_Visualization.xlsx' interpretationMode='0' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.1d4am6u1rvr90x0zyx6vp0a0epg0' name='Retention PM' table='[&apos;Retention PM$&apos;]' type='table'>
+          <columns gridOrigin='A1:F14:no:A1:F14:0' header='yes' outcome='6'>
+            <column datatype='string' name='Purchase Month' ordinal='0' />
+            <column datatype='integer' name='TotalPurchases' ordinal='1' />
+            <column datatype='integer' name='RetainedPurchases' ordinal='2' />
+            <column datatype='integer' name='ChurnedPurchases' ordinal='3' />
+            <column datatype='real' name='RetentionRate' ordinal='4' />
+            <column datatype='real' name='ChurnRate' ordinal='5' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>2</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:G14:no:A1:G14:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Purchase Month</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Purchase Month]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>Purchase Month</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TotalPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[TotalPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>TotalPurchases</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RetainedPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[RetainedPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>RetainedPurchases</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ChurnedPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ChurnedPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>ChurnedPurchases</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RetentionRate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[RetentionRate]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>RetentionRate</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ChurnRate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ChurnRate]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>ChurnRate</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name># of Distinct Customer</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[# of Distinct Customer]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias># of Distinct Customer</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='PurchaseMonth (Date)' datatype='date' name='[Calculation_1760907484093865984]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='DATE([Purchase Month] + &quot;-01&quot;)' />
+      </column>
+      <column caption='PreviousMonth' datatype='datetime' name='[Calculation_1944992119147888641]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='DATETRUNC(&apos;month&apos;, DATEADD(&apos;month&apos;, -1, &#13;&#10;    DATE(LEFT([Purchase Month], 4) + &quot;-&quot; + RIGHT([Purchase Month], 2) + &quot;-01&quot;)&#13;&#10;))' />
+      </column>
+      <column caption='Churn Rate' datatype='real' name='[ChurnRate]' role='measure' type='quantitative' />
+      <column caption='Churned Purchases' datatype='integer' name='[ChurnedPurchases]' role='measure' type='quantitative' />
+      <column caption='Retained Purchases' datatype='integer' name='[RetainedPurchases]' role='measure' type='quantitative' />
+      <column caption='Retention Rate' datatype='real' name='[RetentionRate]' role='measure' type='quantitative' />
+      <column caption='Total Purchases' datatype='integer' name='[TotalPurchases]' role='measure' type='quantitative' />
+      <column caption='Retention PM' datatype='table' name='[__tableau_internal_object_id__].[Retention PM_1AED5A747B39409D96D54ABCD54739A8]' role='measure' type='quantitative' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/TableauTemp/#TableauTemp_0d10jjj0lac1391gl62xy0l37hwx.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='07/10/2025 06:32:59 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='Retention PM (Data_Visualization)' increment-value='%null%' refresh-type='create' rows-inserted='13' timestamp-start='2025-07-10 18:32:56.848' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Purchase Month</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Purchase Month]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Purchase Month</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Retention PM</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>TotalPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[TotalPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>TotalPurchases</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>RetainedPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[RetainedPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>RetainedPurchases</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ChurnedPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ChurnedPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ChurnedPurchases</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>RetentionRate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[RetentionRate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>RetentionRate</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Retention PM</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ChurnRate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[ChurnRate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ChurnRate</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Retention PM</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name># of Distinct Customer</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[# of Distinct Customer]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias># of Distinct Customer</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_1AED5A747B39409D96D54ABCD54739A8]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='Purchase Month' />
+        <field-sort-custom-order field='Calculation_1760907484093865984' />
+        <field-sort-custom-order field='TotalPurchases' />
+        <field-sort-custom-order field='RetainedPurchases' />
+        <field-sort-custom-order field='ChurnedPurchases' />
+        <field-sort-custom-order field='RetentionRate' />
+        <field-sort-custom-order field='ChurnRate' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='Retention PM' id='Retention PM_1AED5A747B39409D96D54ABCD54739A8'>
+            <properties context=''>
+              <relation connection='excel-direct.1d4am6u1rvr90x0zyx6vp0a0epg0' name='Retention PM' table='[&apos;Retention PM$&apos;]' type='table'>
+                <columns gridOrigin='A1:F14:no:A1:F14:0' header='yes' outcome='6'>
+                  <column datatype='string' name='Purchase Month' ordinal='0' />
+                  <column datatype='integer' name='TotalPurchases' ordinal='1' />
+                  <column datatype='integer' name='RetainedPurchases' ordinal='2' />
+                  <column datatype='integer' name='ChurnedPurchases' ordinal='3' />
+                  <column datatype='real' name='RetentionRate' ordinal='4' />
+                  <column datatype='real' name='ChurnRate' ordinal='5' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='KPIs '>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Retention PM (Data_Visualization)' name='federated.0vx26g718my1pl0zv3ajn1ilf4s3' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0vx26g718my1pl0zv3ajn1ilf4s3'>
+            <column datatype='integer' name='[# of Distinct Customer]' role='measure' type='quantitative' />
+            <column caption='PreviousMonth' datatype='datetime' name='[Calculation_1944992119147888641]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATETRUNC(&apos;month&apos;, DATEADD(&apos;month&apos;, -1, &#13;&#10;    DATE(LEFT([Purchase Month], 4) + &quot;-&quot; + RIGHT([Purchase Month], 2) + &quot;-01&quot;)&#13;&#10;))' />
+            </column>
+            <column datatype='string' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_1944992119147888641]' derivation='Month' name='[mn:Calculation_1944992119147888641:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[# of Distinct Customer]' derivation='Sum' name='[sum:# of Distinct Customer:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:# of Distinct Customer:qk]</rows>
+        <cols>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[mn:Calculation_1944992119147888641:ok]</cols>
+      </table>
+      <simple-id uuid='{143BE027-A803-411E-883C-4BC8DF250AA5}' />
+    </worksheet>
+    <worksheet name='Overall Customer Ret - PM'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#ffffff' fontsize='20'>Overall Retention Rate Per Month (2011)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <repository-location derived-from='https://haproxy-traffic-splitter/workbooks/CustomerRetentionRatePerMonth/Sheet1?rev=' id='118896852' path='/workbooks/CustomerRetentionRatePerMonth' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Retention PM (Data_Visualization)' name='federated.0vx26g718my1pl0zv3ajn1ilf4s3' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0vx26g718my1pl0zv3ajn1ilf4s3'>
+            <column caption='PurchaseMonth (Date)' datatype='date' name='[Calculation_1760907484093865984]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATE([Purchase Month] + &quot;-01&quot;)' />
+            </column>
+            <column datatype='string' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column caption='Retention Rate' datatype='real' name='[RetentionRate]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1760907484093865984]' derivation='Month' name='[mn:Calculation_1760907484093865984:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Purchase Month]' derivation='None' name='[none:Purchase Month:nk]' pivot='key' type='nominal' />
+            <column-instance column='[RetentionRate]' derivation='Sum' name='[sum:RetentionRate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1760907484093865984]' derivation='Day-Trunc' name='[tdy:Calculation_1760907484093865984:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[mn:Calculation_1760907484093865984:ok]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[mn:Calculation_1760907484093865984:ok]' />
+              <groupfilter function='member' level='[mn:Calculation_1760907484093865984:ok]' member='12' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[none:Purchase Month:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Purchase Month:nk]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[none:Purchase Month:nk]' member='&quot;2011-10&quot;' />
+                <groupfilter function='member' level='[none:Purchase Month:nk]' member='&quot;2011-11&quot;' />
+                <groupfilter function='member' level='[none:Purchase Month:nk]' member='&quot;2011-12&quot;' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[none:Purchase Month:nk]</column>
+            <column>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[mn:Calculation_1760907484093865984:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' field-type='quantitative' major-origin='0.59999999999999998' major-spacing='1.0' scope='rows' type='space' />
+            <format attr='height' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[none:Purchase Month:nk]' value='93' />
+            <format attr='width' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' value='72' />
+            <format attr='title' class='0' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' scope='cols' value='Month' />
+            <format attr='height' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='38' />
+            <encoding attr='space' class='0' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' field-type='quantitative' major-origin='#2011-01-01 00:00:00#' major-spacing='1.0' major-units='months' max='#2011-09-14 00:00:00#' min='#2010-12-19 00:00:00#' range-type='fixed' scope='cols' type='space' />
+            <format attr='auto-subtitle' class='0' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' scope='cols' value='false' />
+            <format attr='tick-color' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' value='#ffffff' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[none:Purchase Month:nk]' value='132' />
+            <format attr='width' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[mn:Calculation_1760907484093865984:ok]' value='140' />
+            <format attr='color' data-class='subtotal' scope='cols' value='#ffffff' />
+            <format attr='text-format' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' value='p0%' />
+            <format attr='text-format' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='*mmm' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='band-color' scope='cols' value='#ffffff' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[none:Purchase Month:nk]' value='false' />
+            <format attr='color' scope='cols' value='#ffffff' />
+            <format attr='color' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' value='#ffffff' />
+            <format attr='font-size' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' value='12' />
+            <format attr='text-format' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='*mmm' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='band-color' scope='rows' value='#ffffff' />
+            <format attr='band-color' scope='cols' value='#ffffff' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#1b1b1b' />
+            <format attr='band-size' scope='rows' value='1' />
+            <format attr='band-size' scope='cols' value='1' />
+            <format attr='omit-on-special' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='true' />
+            <format attr='break-on-special' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='true' />
+            <format attr='show-null-value-warning' field='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]' value='true' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <text column='[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-color' value='#4e79a7' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='1448' />
+                <format attr='maxwidth' value='1448' />
+                <format attr='minheight' value='647' />
+                <format attr='maxheight' value='647' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[sum:RetentionRate:qk]</rows>
+        <cols>[federated.0vx26g718my1pl0zv3ajn1ilf4s3].[tdy:Calculation_1760907484093865984:qk]</cols>
+      </table>
+      <simple-id uuid='{7528CFD1-D202-4C6F-A6D4-29853F6D5710}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size maxheight='860' maxwidth='650' minheight='560' minwidth='420' />
+      <zones />
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='6' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98134' id='5' param='vert' type-v2='layout-flow' w='97538' x='1231' y='933' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{DF5333EE-8A16-4565-98D8-E1E20FC3FF92}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='worksheet' name='Overall Customer Ret - PM'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{95B1A291-2B66-44E6-B2F9-5436BA9B6D1D}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Dashboard 1'>
+      <viewpoints />
+      <active id='-1' />
+      <simple-id uuid='{0F97F324-E66F-4C3E-B0E4-46B82F010F9E}' />
+    </window>
+    <window class='worksheet' name='KPIs '>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{C8660357-E632-49F1-8836-D4E09F437519}' />
+    </window>
+  </windows>
+</workbook>
