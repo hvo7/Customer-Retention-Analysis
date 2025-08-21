@@ -1,32 +1,34 @@
 # Customer-Retention-Analysis
 
 # Table of Contents
-- [Project Goal](#Project-Goals)
 - [Summary](#Summary)
+- [Project Goal](#Project-Goals)
 - [Introduction](#Introduction)
 - [Key Insights](#Key-Insights)
 - [Dashboard](#Dashboard)
-- [Dashboard](#Recommendations)
+- [Recommendations](#Recommendations)
 - [Data Cleaning](#Data-Cleaning)
+
+# Summary 
 
 # Project Goals
 ### Problem Statement
 Which customers should the company prioritize for a targeted marketing campaign to improve customer retention and maximize revenue over the next 6 months?
 
-
 ## The purpose of this project is to identify customers who will provide the highest marginal gain from a marketing campaign 
 
 ### Stakeholder Questions
-1. How should we prioritize customers for marketing campaign?
-2. What evidence do we have that certain customer behaviors signal future retention or churn?
-3. How can we tell which customers are likely to stop buying from us soon?
-4. What characteristics do high-rentention vs. low-retention customers have?
-5. Who are our most valuable customers based on their purchasing behavior?
-
-# Summary 
+1. Which customers look most likely to churn? 
+    * Can we segment them into high, medium, and low retention risk groups?
+2. Are there specific products or categories where we’re seeing declining repeat purchases?
+    * Which products drive the most revenue from repeat customers versus one-time buyers?
+3. How is average revenue per customer trending? Are our top customers maintaining or reducing spend?
+    * Can we identify “at-risk” high-value customers (big spenders whose purchases are slowing down)?
+4. If we wanted to run a marketing campaign, which exact customers should we prioritize (e.g., those with high revenue but  declining frequency)?
+    * Do we know what time window (e.g., 30 days since last purchase) is critical before churn risk spikes?
 
 # Introduction
-A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to use **Tableau** to create a dashboard that helps non-technical stakeholders target key customers and demonstrates monthly customer retention. I will also use **SQL** to validate existing hypotheses and assumptions regarding customer retention to help provide further investigation as to **How the company can increase customer retention**. 
+A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a targeted marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to use **Tableau** to create a dashboard that helps non-technical stakeholders target key customers and demonstrates monthly customer retention. I will also use **SQL** to validate existing hypotheses and assumptions regarding customer retention to help provide further investigation as to **How the company can increase customer retention**. 
 
 The dataset comes from 
 Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.
@@ -61,37 +63,6 @@ H4: Customers who haven’t purchased in 90+ days are unlikely to return
 H5: Customers with only one purchase have a high likelihood of churning
 
 # Dashboard
-
-Page 1 - answers the following questions regarding overall customer retention and churn by visualizing the data:
-
-* How many customers are we losing each month?
-    - First, a customer is considered "lost" if they have not purchased in 90+ days. 
-
-* Is churn increasing or decreasing over time?
-
-* What’s our overall churn rate? What’s a "normal" churn rate for our business?
-
-* Are we retaining our most valuable customers or losing them?
-
-* What’s the average time between purchases for retained vs. churned customers?
-
-* Do one-time buyers make up the bulk of our churn?
-
-* What countries (or segments) show the highest churn rates?
-
-
-Page 2 - Digs deeper and answers the question of "Which customers should we target?"
-
-* Who are our most at-risk customers right now?
-
-* What behaviors do these at-risk customers have in common?
-
-* Are these high-value or low-value customers?
-
-* Can we segment them further (e.g., by geography, recency, or frequency)?
-
-* What retention levers should we consider (discount, loyalty perks, email nudge)?
-
 
 # Recommendations
 

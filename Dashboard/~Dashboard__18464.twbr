@@ -1,0 +1,1799 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20252.25.0514.2217                               -->
+<workbook original-version='18.1' source-build='2025.2.0 (20252.25.0514.2217)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <_.fcp.IndividualControlFormatting.true...IndividualControlFormatting />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
+  </document-format-change-manifest>
+  <repository-location derived-from='https://localhost/workbooks/CustomerRetentionRatePerMonth?rev=1.0' id='Dashboard_17522632383170' path='/workbooks' revision='1.7' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Data_Visualization' inline='true' name='federated.06shvse1rtt1hl1362vga090jkop' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Data_Visualization' name='excel-direct.0azl17a1si9rtt14jrcxq0fllkr2'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/henry/OneDrive/Personal Career/Personal Projects/Customer Retention Analysis/Customer-Retention-Analysis/Dashboard/Data_Visualization.xlsx' interpretationMode='0' server='' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.0azl17a1si9rtt14jrcxq0fllkr2' name='Retention PM' table='[&apos;Retention PM$&apos;]' type='table'>
+          <columns gridOrigin='A1:G14:no:A1:G14:0' header='yes' outcome='6'>
+            <column datatype='date' date-parse-format='yyyy-MM' name='Purchase Month' ordinal='0' />
+            <column datatype='integer' name='TotalPurchases' ordinal='1' />
+            <column datatype='integer' name='RetainedPurchases' ordinal='2' />
+            <column datatype='integer' name='ChurnedPurchases' ordinal='3' />
+            <column datatype='real' name='RetentionRate' ordinal='4' />
+            <column datatype='real' name='ChurnRate' ordinal='5' />
+            <column datatype='integer' name='# of Distinct Customer' ordinal='6' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>4</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:I14:no:A1:I14:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Purchase Month</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Purchase Month]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>Purchase Month</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TotalPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[TotalPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>TotalPurchases</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RetainedPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[RetainedPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>RetainedPurchases</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ChurnedPurchases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ChurnedPurchases]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>ChurnedPurchases</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RetentionRate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[RetentionRate]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>RetentionRate</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ChurnRate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ChurnRate]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>ChurnRate</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Total Customer</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Total Customer]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>Total Customer</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>New Customers</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[New Customers]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>New Customers</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Cust Diff</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Cust Diff]</local-name>
+            <parent-name>[Retention PM]</parent-name>
+            <remote-alias>Cust Diff</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Recent Total Customers' datatype='integer' name='[Calculation_1286622149355831300]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF &#13;&#10;    MONTH([Purchase Month (copy)_1827898529520033792]) = 11 AND YEAR([Purchase Month (copy)_1827898529520033792]) = 2011&#13;&#10;THEN&#13;&#10;    [Total Customer]&#13;&#10;END' />
+      </column>
+      <column caption='# Customer Prev Month' datatype='integer' name='[Calculation_1286622149356871685]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF &#13;&#10;    DATETRUNC(&#13;&#10;                 &apos;month&apos;,&#13;&#10;                 [Purchase Month (copy)_1827898529520033792]&#13;&#10;              )  = &#13;&#10;     DATEADD(&apos;month&apos;, -2, {FIXED : MAX(DATETRUNC(&apos;month&apos;, [Purchase Month (copy)_1827898529520033792])) })&#13;&#10;THEN&#13;&#10;    [Total Customer]&#13;&#10;END' />
+      </column>
+      <column caption='Cust Diff Color Flag' datatype='string' name='[Calculation_1742893086618423296]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='If &#13;&#10;    [Cust Diff] &lt; 0 THEN &quot;Negative&quot;&#13;&#10;ELSE&#13;&#10;       &quot;Positive&quot;&#13;&#10;END' />
+      </column>
+      <column caption='Churn Rate' datatype='real' name='[ChurnRate]' role='measure' type='quantitative' />
+      <column caption='Churned Purchases' datatype='integer' name='[ChurnedPurchases]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Cust Diff]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[New Customers]' role='measure' type='quantitative' />
+      <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+      </column>
+      <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+      <column caption='Retained Purchases' datatype='integer' name='[RetainedPurchases]' role='measure' type='quantitative' />
+      <column caption='Retention Rate' datatype='real' name='[RetentionRate]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Total Customer]' role='measure' type='quantitative' />
+      <column caption='Total Purchases' datatype='integer' name='[TotalPurchases]' role='measure' type='quantitative' />
+      <column caption='Retention PM' datatype='table' name='[__tableau_internal_object_id__].[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]' role='measure' type='quantitative' />
+      <column-instance column='[Calculation_1742893086618423296]' derivation='None' name='[none:Calculation_1742893086618423296:nk]' pivot='key' type='nominal' />
+      <column-instance column='[ChurnRate]' derivation='Sum' name='[sum:ChurnRate:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Cust Diff]' derivation='Sum' name='[sum:Cust Diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[New Customers]' derivation='Sum' name='[sum:New Customers:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[RetentionRate]' derivation='Sum' name='[sum:RetentionRate:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Total Customer]' derivation='Sum' name='[sum:Total Customer:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:qk]' pivot='key' type='quantitative' />
+      <group hidden='true' name='[Exclusions (Cust Diff Color Flag,MONTH(Purchase_Month(Date)))]' name-style='unqualified' user:auto-column='exclude'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[none:Calculation_1742893086618423296:nk]' />
+          <groupfilter function='level-members' level='[tmn:Purchase Month (copy)_1827898529520033792:qk]' />
+        </groupfilter>
+      </group>
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='Data/TableauTemp/#TableauTemp_101xxf41lu17w310jz1ca1mzgd17.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='07/12/2025 09:34:51 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Purchase Month</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Purchase Month]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Purchase Month</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Retention PM</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>TotalPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[TotalPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>TotalPurchases</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>RetainedPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[RetainedPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>RetainedPurchases</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ChurnedPurchases</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ChurnedPurchases]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ChurnedPurchases</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>RetentionRate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[RetentionRate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>RetentionRate</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Retention PM</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ChurnRate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[ChurnRate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ChurnRate</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Retention PM</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Total Customer</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Total Customer]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Total Customer</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>New Customers</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[New Customers]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>New Customers</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Cust Diff</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Cust Diff]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Cust Diff</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Retention PM</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Retention PM_04033654F6F34C94AA2EAB6196C7EE59]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:New Customers:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop]&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:ChurnRate:qk]&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:Cust Diff:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:Total Customer:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Calculation_1742893086618423296:nk]' type='palette'>
+            <map to='#59a14f'>
+              <bucket>&quot;Positive&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Negative&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Zero&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Retention PM' id='Retention PM_04033654F6F34C94AA2EAB6196C7EE59'>
+            <properties context=''>
+              <relation connection='excel-direct.0azl17a1si9rtt14jrcxq0fllkr2' name='Retention PM' table='[&apos;Retention PM$&apos;]' type='table'>
+                <columns gridOrigin='A1:G14:no:A1:G14:0' header='yes' outcome='6'>
+                  <column datatype='date' date-parse-format='yyyy-MM' name='Purchase Month' ordinal='0' />
+                  <column datatype='integer' name='TotalPurchases' ordinal='1' />
+                  <column datatype='integer' name='RetainedPurchases' ordinal='2' />
+                  <column datatype='integer' name='ChurnedPurchases' ordinal='3' />
+                  <column datatype='real' name='RetentionRate' ordinal='4' />
+                  <column datatype='real' name='ChurnRate' ordinal='5' />
+                  <column datatype='integer' name='# of Distinct Customer' ordinal='6' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='Online Retail' inline='true' name='federated.0bzv2r81m63bs21ecwncn15nxive' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Online Retail' name='excel-direct.1rd0ni71hcf65612uusvs0nqn747'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/henry/OneDrive/Personal Career/Personal Projects/Customer Retention Analysis/Customer-Retention-Analysis/Online Retail.xlsx' interpretationMode='0' server='' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.1rd0ni71hcf65612uusvs0nqn747' name='Online_Retail_Cleaned' table='[Online_Retail_Cleaned$]' type='table'>
+          <columns gridOrigin='A1:I10001:no:A1:I10001:0' header='yes' outcome='2'>
+            <column datatype='integer' name='InvoiceNo' ordinal='0' />
+            <column datatype='string' name='StockCode' ordinal='1' />
+            <column datatype='string' name='Description' ordinal='2' />
+            <column datatype='integer' name='Quantity' ordinal='3' />
+            <column datatype='datetime' name='InvoiceDate' ordinal='4' />
+            <column datatype='real' name='UnitPrice' ordinal='5' />
+            <column datatype='integer' name='CustomerID' ordinal='6' />
+            <column datatype='string' name='Country' ordinal='7' />
+            <column datatype='real' name='Revenue' ordinal='8' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:I10001:no:A1:I10001:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>InvoiceNo</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[InvoiceNo]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>InvoiceNo</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>StockCode</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[StockCode]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>StockCode</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Description</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Description]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>Description</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Quantity</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Quantity]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>Quantity</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>InvoiceDate</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[InvoiceDate]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>InvoiceDate</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UnitPrice</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[UnitPrice]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>UnitPrice</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CustomerID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[CustomerID]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>CustomerID</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Country</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Country]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>Country</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Revenue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Revenue]</local-name>
+            <parent-name>[Online_Retail_Cleaned]</parent-name>
+            <remote-alias>Revenue</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Customer ID' datatype='integer' name='[CustomerID]' role='dimension' type='ordinal' />
+      <column caption='Invoice Date' datatype='datetime' name='[InvoiceDate]' role='dimension' type='ordinal' />
+      <column caption='Invoice No' datatype='integer' name='[InvoiceNo]' role='measure' type='quantitative' />
+      <column caption='Stock Code' datatype='string' name='[StockCode]' role='dimension' type='nominal' />
+      <column caption='Unit Price' datatype='real' name='[UnitPrice]' role='measure' type='quantitative' />
+      <column caption='Online_Retail_Cleaned' datatype='table' name='[__tableau_internal_object_id__].[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]' role='measure' type='quantitative' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='Data/TableauTemp/#TableauTemp_1i5n7d71f6kvss1ebk8331t2shd7.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='07/12/2025 09:36:32 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>InvoiceNo</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[InvoiceNo]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>InvoiceNo</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>47705</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>StockCode</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[StockCode]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>StockCode</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>10836</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Description</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Description]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Description</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>9284</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Quantity</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Quantity]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Quantity</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>301</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>InvoiceDate</remote-name>
+              <remote-type>135</remote-type>
+              <local-name>[InvoiceDate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>InvoiceDate</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>datetime</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>47700</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>UnitPrice</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[UnitPrice]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>UnitPrice</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>419</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>CustomerID</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[CustomerID]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>CustomerID</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13223</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Country</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Country]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Country</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>106</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Revenue</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Revenue]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Revenue</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Online_Retail_Cleaned</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>3544</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Online_Retail_Cleaned' id='Online!Retail!Cleaned_F1F4019B84054F23B4E26431E7B4CA2D'>
+            <properties context=''>
+              <relation connection='excel-direct.1rd0ni71hcf65612uusvs0nqn747' name='Online_Retail_Cleaned' table='[Online_Retail_Cleaned$]' type='table'>
+                <columns gridOrigin='A1:I10001:no:A1:I10001:0' header='yes' outcome='2'>
+                  <column datatype='integer' name='InvoiceNo' ordinal='0' />
+                  <column datatype='string' name='StockCode' ordinal='1' />
+                  <column datatype='string' name='Description' ordinal='2' />
+                  <column datatype='integer' name='Quantity' ordinal='3' />
+                  <column datatype='datetime' name='InvoiceDate' ordinal='4' />
+                  <column datatype='real' name='UnitPrice' ordinal='5' />
+                  <column datatype='integer' name='CustomerID' ordinal='6' />
+                  <column datatype='string' name='Country' ordinal='7' />
+                  <column datatype='real' name='Revenue' ordinal='8' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Customer Counts Per Month'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Data_Visualization' name='federated.06shvse1rtt1hl1362vga090jkop' />
+          </datasources>
+          <datasource-dependencies datasource='federated.06shvse1rtt1hl1362vga090jkop'>
+            <column datatype='integer' name='[New Customers]' role='measure' type='quantitative' />
+            <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+            </column>
+            <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Total Customer]' role='measure' type='quantitative' />
+            <column-instance column='[New Customers]' derivation='Sum' name='[sum:New Customers:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Total Customer]' derivation='Sum' name='[sum:Total Customer:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:New Customers:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:Total Customer:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2010-12-01 00:00:00#' />
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2011-12-01 00:00:00#' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]</column>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]' scope='cols' value='' />
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[Multiple Values]' scope='rows' value='' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+            <encodings>
+              <color column='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.06shvse1rtt1hl1362vga090jkop].[Multiple Values]</rows>
+        <cols>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]</cols>
+      </table>
+      <simple-id uuid='{992191ED-2740-47F5-BA34-73BEEDA7DC81}' />
+    </worksheet>
+    <worksheet name='Customer Retention Rate Per Month'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Data_Visualization' name='federated.06shvse1rtt1hl1362vga090jkop' />
+          </datasources>
+          <datasource-dependencies datasource='federated.06shvse1rtt1hl1362vga090jkop'>
+            <column caption='Churn Rate' datatype='real' name='[ChurnRate]' role='measure' type='quantitative' />
+            <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+            </column>
+            <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column caption='Retention Rate' datatype='real' name='[RetentionRate]' role='measure' type='quantitative' />
+            <column-instance column='[ChurnRate]' derivation='Sum' name='[sum:ChurnRate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[RetentionRate]' derivation='Sum' name='[sum:RetentionRate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:ChurnRate:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2011-10-01 00:00:00#' />
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2011-11-01 00:00:00#' />
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2011-12-01 00:00:00#' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]</column>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]' scope='cols' value='' />
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[Multiple Values]' scope='rows' value='' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' value=''>
+              <formatted-text />
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minheight' value='696' />
+                <format attr='maxheight' value='696' />
+                <format attr='minwidth' value='1201' />
+                <format attr='maxwidth' value='1201' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.06shvse1rtt1hl1362vga090jkop].[Multiple Values]</rows>
+        <cols>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]</cols>
+      </table>
+      <simple-id uuid='{2C9D6BFA-18D9-4F5A-AD0B-74BE82648121}' />
+    </worksheet>
+    <worksheet name='Customers Gained/Lost Per Month'>
+      <repository-location id='CustomerRetentionRatePerMonth' path='/workbooks/Dashboard_17522632383170' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Data_Visualization' name='federated.06shvse1rtt1hl1362vga090jkop' />
+          </datasources>
+          <datasource-dependencies datasource='federated.06shvse1rtt1hl1362vga090jkop'>
+            <column caption='Cust Diff Color Flag' datatype='string' name='[Calculation_1742893086618423296]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='If &#13;&#10;    [Cust Diff] &lt; 0 THEN &quot;Negative&quot;&#13;&#10;ELSE&#13;&#10;       &quot;Positive&quot;&#13;&#10;END' />
+            </column>
+            <column datatype='integer' name='[Cust Diff]' role='measure' type='quantitative' />
+            <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+            </column>
+            <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='MY' name='[my:Purchase Month (copy)_1827898529520033792:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_1742893086618423296]' derivation='None' name='[none:Calculation_1742893086618423296:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Cust Diff]' derivation='Sum' name='[sum:Cust Diff:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='Month-Trunc' name='[tmn:Purchase Month (copy)_1827898529520033792:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[Exclusions (Cust Diff Color Flag,MONTH(Purchase_Month(Date)))]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='level-members' level='[none:Calculation_1742893086618423296:nk]' />
+                <groupfilter function='level-members' level='[tmn:Purchase Month (copy)_1827898529520033792:qk]' />
+              </groupfilter>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='member' level='[none:Calculation_1742893086618423296:nk]' member='&quot;Positive&quot;' />
+                <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:qk]' member='#2011-09-01 00:00:00#' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[my:Purchase Month (copy)_1827898529520033792:ok]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201012' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201101' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201102' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201103' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201104' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201105' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201106' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201107' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201108' />
+              <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201109' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' />
+              <groupfilter function='member' level='[tmn:Purchase Month (copy)_1827898529520033792:ok]' member='#2010-12-01 00:00:00#' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[my:Purchase Month (copy)_1827898529520033792:ok]</column>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[Exclusions (Cust Diff Color Flag,MONTH(Purchase_Month(Date)))]</column>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]' scope='cols' value='' />
+            <format attr='auto-subtitle' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]' scope='cols' value='true' />
+            <format attr='title' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:Cust Diff:qk]' scope='rows' value='Amt of Customer Gained/Lost' />
+            <encoding attr='space' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]' field-type='quantitative' max='#2011-10-01 02:11:58.105#' min='#2010-12-03 04:24:29.048#' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:Cust Diff:qk]' field-type='quantitative' max='251' min='-228' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='height-header' value='16' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
+            <_.fcp.IndividualControlFormatting.true...format attr='text-align' field='[federated.06shvse1rtt1hl1362vga090jkop].[none:Calculation_1742893086618423296:nk]' id='legend-color' value='center' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+            <encodings>
+              <color column='[federated.06shvse1rtt1hl1362vga090jkop].[none:Calculation_1742893086618423296:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.06shvse1rtt1hl1362vga090jkop].[sum:Cust Diff:qk]</rows>
+        <cols>[federated.06shvse1rtt1hl1362vga090jkop].[tmn:Purchase Month (copy)_1827898529520033792:qk]</cols>
+      </table>
+      <simple-id uuid='{21873275-B7EE-4D32-9851-D32B53A44C42}' />
+    </worksheet>
+    <worksheet name='KPI - Retention Rate From Last Month'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Retention Rate From Last Month</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <repository-location id='KPI-RetentionRateFromLastMonth' path='/workbooks/Dashboard_17522632383170' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Data_Visualization' name='federated.06shvse1rtt1hl1362vga090jkop' />
+          </datasources>
+          <datasource-dependencies datasource='federated.06shvse1rtt1hl1362vga090jkop'>
+            <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+            </column>
+            <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column caption='Retention Rate' datatype='real' name='[RetentionRate]' role='measure' type='quantitative' />
+            <column-instance column='[Purchase Month (copy)_1827898529520033792]' derivation='MY' name='[my:Purchase Month (copy)_1827898529520033792:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[RetentionRate]' derivation='Sum' name='[sum:RetentionRate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.06shvse1rtt1hl1362vga090jkop].[my:Purchase Month (copy)_1827898529520033792:ok]'>
+            <groupfilter function='member' level='[my:Purchase Month (copy)_1827898529520033792:ok]' member='201111' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.06shvse1rtt1hl1362vga090jkop].[my:Purchase Month (copy)_1827898529520033792:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]' value='p0%' />
+            <format attr='font-size' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]' value='22' />
+            <format attr='font-weight' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-align' scope='cols' value='center' />
+            <format attr='vertical-align' scope='cols' value='center' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='font-size' value='24' />
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.06shvse1rtt1hl1362vga090jkop].[sum:RetentionRate:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{F01197B0-A343-439D-8951-3718E73A2B44}' />
+    </worksheet>
+    <worksheet name='KPI - Total Customer From Last Month'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Customers From Last Month
+</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <repository-location id='KPI-TotalCustomerFromLastMonth' path='/workbooks/Dashboard_17522632383170' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Data_Visualization' name='federated.06shvse1rtt1hl1362vga090jkop' />
+          </datasources>
+          <datasource-dependencies datasource='federated.06shvse1rtt1hl1362vga090jkop'>
+            <column caption='Recent Total Customers' datatype='integer' name='[Calculation_1286622149355831300]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF &#13;&#10;    MONTH([Purchase Month (copy)_1827898529520033792]) = 11 AND YEAR([Purchase Month (copy)_1827898529520033792]) = 2011&#13;&#10;THEN&#13;&#10;    [Total Customer]&#13;&#10;END' />
+            </column>
+            <column caption='Purchase_Month(Date)' datatype='datetime' datatype-customized='true' name='[Purchase Month (copy)_1827898529520033792]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='DATEPARSE(&apos;yyyy-MM-dd&apos;, [Purchase Month])' />
+            </column>
+            <column datatype='string' datatype-customized='true' name='[Purchase Month]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Total Customer]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1286622149355831300]' derivation='Sum' name='[sum:Calculation_1286622149355831300:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='font-size' data-class='subtotal' scope='cols' value='22' />
+            <format attr='font-weight' data-class='subtotal' scope='cols' value='bold' />
+            <format attr='font-size' data-class='subtotal' scope='rows' value='22' />
+            <format attr='font-weight' data-class='subtotal' scope='rows' value='bold' />
+            <format attr='font-size' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:Calculation_1286622149355831300:qk]' value='22' />
+            <format attr='font-weight' field='[federated.06shvse1rtt1hl1362vga090jkop].[sum:Calculation_1286622149355831300:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='font-weight' data-class='subtotal' scope='cols' value='bold' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-align' value='center' />
+            <format attr='vertical-align' value='center' />
+            <format attr='font-size' scope='cols' value='22' />
+            <format attr='font-weight' scope='cols' value='bold' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='font-size' value='24' />
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.06shvse1rtt1hl1362vga090jkop].[sum:Calculation_1286622149355831300:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{620CFC97-509E-403E-B5F7-2100410C72D7}' />
+    </worksheet>
+    <worksheet name='KPI - Total Purchases  From Last Month'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Purchases  From Last Month</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <repository-location id='KPI-TotalPurchasesFromLastMonth' path='/workbooks/Dashboard_17522632383170' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Online Retail' name='federated.0bzv2r81m63bs21ecwncn15nxive' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0bzv2r81m63bs21ecwncn15nxive'>
+            <column caption='Invoice Date' datatype='datetime' name='[InvoiceDate]' role='dimension' type='ordinal' />
+            <column caption='Invoice No' datatype='integer' name='[InvoiceNo]' role='measure' type='quantitative' />
+            <column-instance column='[InvoiceNo]' derivation='CountD' name='[ctd:InvoiceNo:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[InvoiceDate]' derivation='MY' name='[my:InvoiceDate:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0bzv2r81m63bs21ecwncn15nxive].[my:InvoiceDate:ok]'>
+            <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201111' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0bzv2r81m63bs21ecwncn15nxive].[my:InvoiceDate:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='font-size' field='[federated.0bzv2r81m63bs21ecwncn15nxive].[ctd:InvoiceNo:qk]' value='22' />
+            <format attr='font-weight' field='[federated.0bzv2r81m63bs21ecwncn15nxive].[ctd:InvoiceNo:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='font-size' value='24' />
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0bzv2r81m63bs21ecwncn15nxive].[ctd:InvoiceNo:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{DBDE5450-943E-42D0-A350-A98A1246EC3E}' />
+    </worksheet>
+    <worksheet name='Revenue Map'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Online Retail' name='federated.0bzv2r81m63bs21ecwncn15nxive' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0bzv2r81m63bs21ecwncn15nxive'>
+            <column datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Invoice Date' datatype='datetime' name='[InvoiceDate]' role='dimension' type='ordinal' />
+            <column datatype='real' name='[Revenue]' role='measure' type='quantitative' />
+            <column-instance column='[InvoiceDate]' derivation='MY' name='[my:InvoiceDate:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Country]' derivation='None' name='[none:Country:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Revenue]' derivation='Sum' name='[sum:Revenue:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0bzv2r81m63bs21ecwncn15nxive].[my:InvoiceDate:ok]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201012' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201101' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201102' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201103' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201104' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201105' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201106' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201107' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201108' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201109' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201110' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201111' />
+              <groupfilter function='member' level='[my:InvoiceDate:ok]' member='201112' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0bzv2r81m63bs21ecwncn15nxive].[my:InvoiceDate:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0bzv2r81m63bs21ecwncn15nxive].[Longitude (generated)]' field-type='quantitative' max='5227409.0580018684' min='-1842867.4785751924' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0bzv2r81m63bs21ecwncn15nxive].[Latitude (generated)]' field-type='quantitative' max='7608363.4657483678' min='4214630.8040472176' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0bzv2r81m63bs21ecwncn15nxive].[sum:Revenue:qk]' />
+              <text column='[federated.0bzv2r81m63bs21ecwncn15nxive].[sum:Revenue:qk]' />
+              <lod column='[federated.0bzv2r81m63bs21ecwncn15nxive].[none:Country:nk]' />
+              <geometry column='[federated.0bzv2r81m63bs21ecwncn15nxive].[Geometry (generated)]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0bzv2r81m63bs21ecwncn15nxive].[Latitude (generated)]</rows>
+        <cols>[federated.0bzv2r81m63bs21ecwncn15nxive].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{1A9B70B2-AFEC-493C-98DD-5C5B162CAF71}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard'>
+      <style />
+      <size maxheight='2000' maxwidth='1920' minheight='2000' minwidth='1920' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='35' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='99100' id='50' param='vert' type-v2='layout-flow' w='99062' x='469' y='450'>
+            <zone h='99100' id='42' param='horz' type-v2='layout-flow' w='99062' x='469' y='450'>
+              <zone h='99100' id='40' param='horz' type-v2='layout-flow' w='90729' x='469' y='450'>
+                <zone h='99100' id='36' type-v2='layout-basic' w='90729' x='469' y='450' />
+              </zone>
+              <zone fixed-size='160' h='99100' id='41' is-fixed='true' param='vert' type-v2='layout-flow' w='8333' x='91198' y='450'>
+                <zone h='3300' id='43' name='Customers Gained/Lost Per Month' pane-specification-id='5' param='[federated.06shvse1rtt1hl1362vga090jkop].[none:Calculation_1742893086618423296:nk]' type-v2='color' w='8333' x='91198' y='450'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='2400' id='48' name='Customer Retention Rate Per Month' pane-specification-id='3' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' show-title='false' type-v2='color' w='8333' x='91198' y='3750'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='3300' id='53' name='Customer Counts Per Month' pane-specification-id='2' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' type-v2='color' w='8333' x='91198' y='6150'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='10850' id='3' layout-strategy-id='distribute-evenly' param='horz' type-v2='layout-flow' w='70469' x='14063' y='13100'>
+          <zone h='10750' id='4' name='KPI - Total Customer From Last Month' w='23489' x='14115' y='13150'>
+            <layout-cache cell-count-w='1' fixed-size-h='646' type-h='fixed' type-w='cell' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='490' h='10750' id='5' is-fixed='true' name='KPI - Total Purchases  From Last Month' w='23438' x='37604' y='13150'>
+            <layout-cache type-h='fixed' type-w='cell' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='334' h='10750' id='6' is-fixed='true' name='KPI - Retention Rate From Last Month' w='23437' x='61042' y='13150'>
+            <layout-cache type-h='fixed' type-w='cell' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+        <zone h='23900' id='20' param='horz' type-v2='layout-flow' w='33177' x='50885' y='40150'>
+          <zone h='23800' id='21' name='Revenue Map' w='33073' x='50937' y='40200'>
+            <layout-cache minwidth='202' type-h='fixed' type-w='scalable' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='solid' />
+              <format attr='border-width' value='1' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+        <zone forceUpdate='true' h='8400' id='27' type-v2='text' w='69844' x='14010' y='2850'>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontsize='36'>Customer Retention Overview </run>
+          </formatted-text>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+        <zone h='16400' id='33' param='horz' type-v2='layout-flow' w='33854' x='14063' y='23850'>
+          <zone fixed-size='652' h='16300' id='34' is-fixed='true' name='Customers Gained/Lost Per Month' w='33750' x='14115' y='23900'>
+            <layout-cache minwidth='163' type-h='fixed' type-w='scalable' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+        <zone h='16500' id='46' param='horz' type-v2='layout-flow' w='36563' x='47917' y='23800'>
+          <zone h='16400' id='47' name='Customer Retention Rate Per Month' w='36459' x='47969' y='23850'>
+            <layout-cache has-max-size-w='true' maxwidth='1231' minwidth='1231' type-h='fixed' type-w='scalable' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+        <zone h='23750' id='51' param='horz' type-v2='layout-flow' w='36979' x='14115' y='40250'>
+          <zone fixed-size='607' h='23650' id='52' is-fixed='true' name='Customer Counts Per Month' w='36875' x='14167' y='40300'>
+            <layout-cache minheight='173' minwidth='136' type-h='scalable' type-w='scalable' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='2100' minheight='2100' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='57' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='99200' id='56' param='vert' type-v2='layout-flow' w='99166' x='417' y='400'>
+                <zone forceUpdate='true' h='8417' id='27' type-v2='text' w='71250' x='12604' y='2833'>
+                  <formatted-text>
+                    <run bold='true' fontalignment='1' fontsize='36'>Customer Retention Overview </run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='solid' />
+                    <format attr='border-width' value='1' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='207' h='10750' id='4' is-fixed='true' name='KPI - Total Customer From Last Month' w='23489' x='14115' y='13150'>
+                  <layout-cache cell-count-w='1' fixed-size-h='646' type-h='fixed' type-w='cell' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='207' h='10750' id='5' is-fixed='true' name='KPI - Total Purchases  From Last Month' w='23438' x='37604' y='13150'>
+                  <layout-cache type-h='fixed' type-w='cell' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='207' h='10750' id='6' is-fixed='true' name='KPI - Retention Rate From Last Month' w='23437' x='61042' y='13150'>
+                  <layout-cache type-h='fixed' type-w='cell' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='16400' id='47' is-fixed='true' name='Customer Retention Rate Per Month' w='36042' x='47969' y='23850'>
+                  <layout-cache has-max-size-w='true' maxwidth='1231' minwidth='1231' type-h='fixed' type-w='scalable' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='2400' id='48' name='Customer Retention Rate Per Month' pane-specification-id='3' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' show-title='false' type-v2='color' w='8333' x='91198' y='3750'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='16300' id='34' is-fixed='true' name='Customers Gained/Lost Per Month' w='33750' x='14115' y='23900'>
+                  <layout-cache minwidth='163' type-h='fixed' type-w='scalable' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='3300' id='43' name='Customers Gained/Lost Per Month' pane-specification-id='5' param='[federated.06shvse1rtt1hl1362vga090jkop].[none:Calculation_1742893086618423296:nk]' type-v2='color' w='8333' x='91198' y='450'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='23800' id='21' is-fixed='true' name='Revenue Map' w='33073' x='50937' y='40200'>
+                  <layout-cache minwidth='202' type-h='fixed' type-w='scalable' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='solid' />
+                    <format attr='border-width' value='1' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='23650' id='52' is-fixed='true' name='Customer Counts Per Month' w='36875' x='14167' y='40300'>
+                  <layout-cache minheight='173' minwidth='136' type-h='scalable' type-w='scalable' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='3300' id='53' name='Customer Counts Per Month' pane-specification-id='2' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' type-v2='color' w='8333' x='91198' y='6150'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='solid' />
+                <format attr='border-width' value='1' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{0024BFDA-1BC0-49E5-9371-144BACD392ED}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='51'>
+    <window class='dashboard' name='Dashboard'>
+      <viewpoints>
+        <viewpoint name='Customer Counts Per Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Customer Retention Rate Per Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Customers Gained/Lost Per Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='KPI - Retention Rate From Last Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='KPI - Total Customer From Last Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='KPI - Total Purchases  From Last Month'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Revenue Map'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='21' />
+      <simple-id uuid='{A547EA37-F962-487A-AE6D-6E2D5FD8D3BA}' />
+    </window>
+    <window class='worksheet' name='Customers Gained/Lost Per Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='161'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{3708A316-4DC4-4283-A1BC-2A9997379E0E}' />
+    </window>
+    <window class='worksheet' name='Customer Retention Rate Per Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='2147483647'>
+            <card pane-specification-id='3' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' show-title='false' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{699CDCF7-A022-4532-A2D4-542D37FB93AD}' />
+    </window>
+    <window class='worksheet' name='KPI - Total Customer From Last Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D1426474-0873-4B82-B79D-B81955133376}' />
+    </window>
+    <window class='worksheet' name='KPI - Total Purchases  From Last Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{246EA1FB-4575-48E3-967E-1BC44FFAF31E}' />
+    </window>
+    <window class='worksheet' name='KPI - Retention Rate From Last Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{6816D3BE-93DA-4CDC-A3A6-583F7F19CF61}' />
+    </window>
+    <window class='worksheet' name='Customer Counts Per Month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='2147483647'>
+            <card pane-specification-id='2' param='[federated.06shvse1rtt1hl1362vga090jkop].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{9602E967-F01B-4E7E-8667-8C43AD860073}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Revenue Map'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='0'>
+            <card pane-specification-id='2' param='[federated.0bzv2r81m63bs21ecwncn15nxive].[sum:Revenue:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{EB3D839A-4D8F-495D-AB08-E597E15B323F}' />
+    </window>
+  </windows>
+</workbook>
