@@ -15,8 +15,6 @@
 ### Problem Statement
 Which customers should the company prioritize for a targeted marketing campaign to improve customer retention and maximize revenue over the next 6 months?
 
-## The purpose of this project is to identify customers who will provide the highest marginal gain from a marketing campaign 
-
 ### Stakeholder Questions
 1. Which customers look most likely to churn? 
     * Can we segment them into high, medium, and low retention risk groups?
@@ -28,7 +26,9 @@ Which customers should the company prioritize for a targeted marketing campaign 
     * Do we know what time window (e.g., 30 days since last purchase) is critical before churn risk spikes?
 
 # Introduction
-A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a targeted marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. I hope to use **Tableau** to create a dashboard that helps non-technical stakeholders target key customers and demonstrates monthly customer retention. I will also use **SQL** to validate existing hypotheses and assumptions regarding customer retention to help provide further investigation as to **How the company can increase customer retention**. 
+A retailer company named "Simple Product Co." aims to improve customer retention and increase revenue. To do this, they plan to execute a targeted marketing campaign. Often times, because retaining customers is cheaper than acquiring new ones, they are in need of determining which customers are at highest risk of churning and thus are prime targets. By focusing efforts on the right customers that are most likely to churn, the company can maximize ROI on marketing spend. 
+
+I used **Tableau** to create a dashboard that helps non-technical stakeholders target key customers and demonstrates monthly customer retention. I  also used **SQL** to validate existing hypotheses and assumptions regarding customer retention to help provide further investigation as to **How the company can increase customer retention**. 
 
 The dataset comes from 
 Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.
@@ -65,13 +65,6 @@ H5: Customers with only one purchase have a high likelihood of churning
 # Dashboard
 
 # Recommendations
-
-
-
-
-
-
-
 
 <!--Annotations
 Table of Contents:
