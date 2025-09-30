@@ -8,8 +8,8 @@ WITH Customer_Order_Months AS
 		ROUND(SUM(Revenue),2) AS Monthly_Revenue
 	FROM dbo.Online_Retail_Analysis
 	WHERE Year(InvoiceDate) = 2011 
-		AND MONTH(InvoiceDate) >= 6 
 		AND CustomerID IS NOT NULL
+		AND CUSTOMERID = 12347
 	GROUP BY 
 		CustomerID,
 		YEAR(InvoiceDate),
@@ -22,7 +22,10 @@ Averages AS
 		CustomerID,
 		Month_Year,
 		Monthly_Revenue,
-		AVG(Monthly_Revenue) OVER (PARTITION BY CustomerID) AS Avg_Revenue,
+		AVG(Monthly_Revenue) OVER (PARTITION BY 
+									CustomerID,
+									CASE WHEN MONTH(Month_Year) <= 6 THEN 1 ELSE 2 END						  						  
+								  ) AS Avg_Revenue,
 		AVG(CAST(Month_Year AS FLOAT)) OVER (PARTITION BY CustomerID) AS Avg_Date
 	FROM Customer_Order_Months
 ),
@@ -43,8 +46,8 @@ Risk_Groups AS
 		CustomerID,
 		RFM_Score,
 		CASE 
-			WHEN (Recency + Frequency) <= 2 THEN 'Low_Risk'
-			WHEN (Recency + Frequency) >= 5 THEN 'High_Risk'
+			WHEN (CAST(Recency AS INT) + CAST(Frequency AS INT)) IN (2,3,4) THEN 'High_Risk'
+			WHEN (CAST(Recency AS INT) + CAST(Frequency AS INT)) IN (9,10) THEN 'Low_Risk'
 			ELSE 'Medium_Risk'
 		END AS Risk_Group
 	FROM dbo.RFM_Analysis
@@ -70,6 +73,3 @@ ON a.CustomerID = b.CustomerID
 WHERE Risk_Group = 'Low_Risk'
 GROUP BY a.CustomerID, b.Risk_Group
 ORDER BY Coefficient DESC
-
-SELECT *
-FROM dbo.RFM_Analysis

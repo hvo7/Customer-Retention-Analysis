@@ -1,4 +1,4 @@
-CustomerID,Max_InvoiceDate,CountDistinct(InvoiceDate),AVG(Revenue),Recency,Frequency,Monetary,RFM_Score
+CustomerID,Max of InvoiceDate,Distinct Count of InvoiceDate,Average of Revenue,Recency,Frequency,Monetary,RFM_Score
 ,40886.43,276,17.11,5,5,3,553
 12346,40561.43,2,0.00,1,2,1,121
 12347,40884.66,7,23.68,5,4,4,544

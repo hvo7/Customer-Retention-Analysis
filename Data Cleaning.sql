@@ -18,4 +18,3 @@ SELECT *
 FROM dbo.Online_Retail_Cleaned
 
 
-
