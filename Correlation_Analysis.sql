@@ -9,7 +9,6 @@ WITH Customer_Order_Months AS
 	FROM dbo.Online_Retail_Analysis
 	WHERE Year(InvoiceDate) = 2011 
 		AND CustomerID IS NOT NULL
-		AND CUSTOMERID = 12347
 	GROUP BY 
 		CustomerID,
 		YEAR(InvoiceDate),
@@ -22,12 +21,20 @@ Averages AS
 		CustomerID,
 		Month_Year,
 		Monthly_Revenue,
+		CASE WHEN 
+			MONTH(Month_Year) <= 6 THEN 1 ELSE 2 
+			END AS Half,
 		AVG(Monthly_Revenue) OVER (PARTITION BY 
 									CustomerID,
 									CASE WHEN MONTH(Month_Year) <= 6 THEN 1 ELSE 2 END						  						  
 								  ) AS Avg_Revenue,
-		AVG(CAST(Month_Year AS FLOAT)) OVER (PARTITION BY CustomerID) AS Avg_Date
+		AVG(CAST(Month_Year AS FLOAT)) OVER (PARTITION BY 
+												CustomerID,
+												CASE WHEN MONTH(Month_Year) <= 6 THEN 1 ELSE 2 END		
+											) AS Avg_Date
 	FROM Customer_Order_Months
+
+
 ),
 
 Diffs AS 
@@ -35,6 +42,10 @@ Diffs AS
 	SELECT
 		CustomerID,
 		Month_Year,
+		Monthly_Revenue,
+		Half,
+		Avg_Revenue,
+		Avg_Date,
 		CAST(Month_Year AS FLOAT) - Avg_Date AS Date_Diff,
 		Monthly_Revenue - Avg_Revenue AS Revenue_Diff
 	FROM Averages
@@ -51,25 +62,35 @@ Risk_Groups AS
 			ELSE 'Medium_Risk'
 		END AS Risk_Group
 	FROM dbo.RFM_Analysis
+),
+
+Coefficients AS
+(
+	SELECT
+			a.CustomerID,
+			a.Half,
+			COALESCE
+			(
+				SUM(Date_Diff * Revenue_Diff)  /
+				NULLIF
+				(
+					SQRT
+					(
+						SUM(POWER(Date_Diff,2)) * SUM (POWER(Revenue_Diff,2))
+					)
+				,0)
+			,0)	AS Coefficient,
+			Risk_Group
+	FROM Diffs a
+	LEFT JOIN Risk_Groups b
+	ON a.CustomerID = b.CustomerID
+	WHERE Risk_Group = 'Low_Risk'
+	GROUP BY a.CustomerID, b.Risk_Group, a.Half
 )
 
-SELECT
-		a.CustomerID,
-		COALESCE
-		(
-			SUM(Date_Diff * Revenue_Diff)  /
-			NULLIF
-			(
-				SQRT
-				(
-					SUM(POWER(Date_Diff,2)) * SUM (POWER(Revenue_Diff,2))
-				)
-			,0)
-		,0)	AS Coefficient,
-		Risk_Group
-FROM Diffs a
-LEFT JOIN Risk_Groups b
-ON a.CustomerID = b.CustomerID
-WHERE Risk_Group = 'Low_Risk'
-GROUP BY a.CustomerID, b.Risk_Group
-ORDER BY Coefficient DESC
+SELECT 
+	Half,
+	AVG(Coefficient) AS Coefficient,
+	MAX(Risk_Group) AS Risk_group
+FROM Coefficients
+GROUP BY Half
