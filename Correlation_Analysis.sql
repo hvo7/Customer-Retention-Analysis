@@ -88,9 +88,12 @@ Coefficients AS
 	GROUP BY a.CustomerID, b.Risk_Group, a.Half
 )
 
-SELECT 
-	Half,
-	AVG(Coefficient) AS Coefficient,
-	MAX(Risk_Group) AS Risk_group
+SELECT
+	CustomerID,
+	MAX(CASE WHEN Half = 1 THEN Coefficient END) AS Coeff_H1,
+	MAX(CASE WHEN Half = 2 THEN Coefficient END) AS Coeff_H2,
+	MAX(CASE WHEN Half = 2 THEN Coefficient END) - MAX(CASE WHEN Half = 1 THEN Coefficient END) AS Coeff_Diff
 FROM Coefficients
-GROUP BY Half
+GROUP BY CustomerID
+HAVING MAX(CASE WHEN Half = 1 THEN Coefficient END) IS NOT NULL
+AND MAX(CASE WHEN Half = 2 THEN Coefficient END) - MAX(CASE WHEN Half = 1 THEN Coefficient END) < 0
