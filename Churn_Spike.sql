@@ -1,5 +1,12 @@
 USE Online_Retail;
 
+DECLARE @asof DATE = 
+(
+	SELECT
+		Max(CAST(InvoiceDate AS DATE))
+	FROM dbo.Online_Retail_Analysis
+)
+
 WITH Orders AS 
 (
 	SELECT
@@ -29,4 +36,3 @@ SELECT
 			 Purchase_Date) AS Days_Between_Purchases
 FROM Orders
 ORDER BY CustomerID, Purchase_Date
-	
