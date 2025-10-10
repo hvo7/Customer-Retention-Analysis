@@ -8,6 +8,7 @@ WITH First_Orders AS
 		CustomerID,
 		Description,
 		InvoiceDate,
+		DATEFROMPARTS(YEAR(InvoiceDate), MONTH(InvoiceDate), 1) AS Month_Year,
 		MIN(InvoiceDate) OVER (PARTITION BY CustomerID, Description) AS First_Purchase
 	FROM dbo.Online_Retail_Analysis
 	WHERE CustomerID IS NOT NULL AND Description IS NOT NULL
@@ -17,11 +18,12 @@ Unique_Customer AS
 (
 	SELECT
 		Description,
+		Month_Year,
 		COUNT(DISTINCT(CustomerID)) AS Unique_Customers
-	FROM dbo.Online_Retail_Analysis
+	FROM First_Orders
 	WHERE Description IS NOT NULL AND CustomerID IS NOT NULL
-	GROUP BY Description
-),
+	GROUP BY Description, Month_Year
+), 
 
 Repeat_Flag AS 
 (
@@ -29,6 +31,7 @@ Repeat_Flag AS
 		b.CustomerID,
 		b.Description,
 		b.InvoiceDate,
+		a.Month_Year,
 		First_Purchase,
 		CASE WHEN 
 			b.InvoiceDate > First_Purchase 
@@ -36,22 +39,23 @@ Repeat_Flag AS
 			END AS Repeat_Flag
 	FROM First_Orders a 
 	RIGHT JOIN dbo.Online_Retail_Analysis b
-	ON a.CustomerID = b.CustomerID 
-	AND a.Description = b.Description
-	AND a.InvoiceDate = b.InvoiceDate
+		ON a.CustomerID = b.CustomerID 
+		AND a.Description = b.Description
+		AND a.InvoiceDate = b.InvoiceDate
 	WHERE b.Description IS NOT NULL AND b.CustomerID IS NOT NULL
-),
+)
 
-Repeat_Customer AS 
-(
+-- Repeat_Customer AS 
+--(
 	SELECT 
 		Description,
+		Month_Year,
 		COUNT
 		(
 			DISTINCT CASE WHEN Repeat_Flag = 1 THEN CustomerID END
 		) AS Repeat_Customers
 	FROM Repeat_Flag
-	GROUP BY Description
+	GROUP BY Description, Month_Year
 ),
 
 Repeat_Rate AS 
