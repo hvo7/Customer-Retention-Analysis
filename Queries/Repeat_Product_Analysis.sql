@@ -12,17 +12,21 @@ WITH First_Orders AS
 		MIN(InvoiceDate) OVER (PARTITION BY CustomerID, Description) AS First_Purchase
 	FROM dbo.Online_Retail_Analysis
 	WHERE CustomerID IS NOT NULL AND Description IS NOT NULL
-),
+)
 
-Unique_Customer AS 
-(
+--Unique_Customer AS 
+--(
 	SELECT
 		Description,
 		Month_Year,
-		COUNT(DISTINCT(CustomerID)) AS Unique_Customers
+		COUNT(DISTINCT(CustomerID)) OVER (
+										   PARTITION BY Description 
+										   ORDER BY InvoiceDate ASC 
+										   ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+										 ) AS Unique_Customers
 	FROM First_Orders
 	WHERE Description IS NOT NULL AND CustomerID IS NOT NULL
-	GROUP BY Description, Month_Year
+	ORDER BY Description, Month_Year
 ), 
 
 Repeat_Flag AS 
