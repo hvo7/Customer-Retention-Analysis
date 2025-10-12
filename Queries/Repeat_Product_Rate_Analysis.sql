@@ -5,15 +5,37 @@ USE Online_Retail;
 WITH First_Orders AS 
 (
 	SELECT
-		CustomerID,
 		Description,
 		InvoiceDate,
+		CustomerID,
 		DATEFROMPARTS(YEAR(InvoiceDate), MONTH(InvoiceDate), 1) AS Month_Year,
 		MIN(InvoiceDate) OVER (PARTITION BY CustomerID, Description) AS First_Purchase
 	FROM dbo.Online_Retail_Analysis
-	WHERE CustomerID IS NOT NULL AND Description IS NOT NULL
+	WHERE CustomerID IS NOT NULL 
+		AND Description IS NOT NULL
+		AND InvoiceNo NOT LIKE '%C%'
+),
+
+Monthly_Customers AS
+(
+	SELECT
+		Description,
+		Month_Year,
+		CustomerID
+	FROM First_Orders
+	GROUP BY CustomerID, Description, Month_Year
 )
 
+SELECT *
+	--a.Description,
+	--COUNT(DISTINCT(b.CustomerID)) AS Unique_Customers
+FROM Monthly_Customers a
+JOIN Monthly_Customers b
+	ON a.Description = b.Description
+	AND b.Month_Year <= a.Month_Year
+--GROUP BY b.Description, b.Month_Year
+
+/*
 --Unique_Customer AS 
 --(
 	SELECT
@@ -27,6 +49,16 @@ WITH First_Orders AS
 	FROM First_Orders
 	WHERE Description IS NOT NULL AND CustomerID IS NOT NULL
 	ORDER BY Description, Month_Year
+
+
+
+
+
+
+
+
+
+
 ), 
 
 Repeat_Flag AS 
@@ -87,3 +119,4 @@ LEFT JOIN Repeat_Rate b
 ON a.Description = b.Description
 WHERE a.Description IS NOT NULL AND CustomerID IS NOT NULL
 GROUP BY Repeat_Product_Flag
+*/
