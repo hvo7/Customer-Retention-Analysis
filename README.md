@@ -12,7 +12,7 @@
 # Summary 
 
 # Dashboard
-[Open the Dashboard](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+[![Open the interactive dashboard](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard.png?:showVizHome=no&:refresh=yes)](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard?:showVizHome=no)
 
 # Project Goals
 ### Problem Statement
