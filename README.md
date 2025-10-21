@@ -2,14 +2,17 @@
 
 # Table of Contents
 - [Summary](#Summary)
+- [Dashboard](#Dashboard)
 - [Project Goal](#Project-Goals)
 - [Introduction](#Introduction)
 - [Key Insights](#Key-Insights)
-- [Dashboard](#Dashboard)
-- [Recommendations](#Recommendations)
+- [Slide Deck](#Slide-Deck)
 - [Data Cleaning](#Data-Cleaning)
 
 # Summary 
+
+# Dashboard
+[Open the Dashboard](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 # Project Goals
 ### Problem Statement
@@ -62,9 +65,7 @@ H4: Customers who haven’t purchased in 90+ days are unlikely to return
 
 H5: Customers with only one purchase have a high likelihood of churning
 
-# Dashboard
-
-# Recommendations
+# Slide Deck
 
 <!--Annotations
 Table of Contents:
