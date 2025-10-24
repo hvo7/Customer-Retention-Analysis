@@ -18,36 +18,60 @@ WITH Monthly_Revenue AS
 		MONTH(InvoiceDate)
 ),
 
+Customers AS
+(
+	SELECT
+		DISTINCT a.CustomerID, b.RFM_Score
+	FROM dbo.Online_Retail_Analysis a
+	JOIN RFM_Analysis b
+		ON a.CustomerID = b.CustomerID
+	WHERE a.CustomerID IS NOT NULL
+		AND InvoiceNo NOT LIKE '%C%'
+
+),
+
 Months AS 
 (
 	SELECT 
 		Distinct(Month_Year) AS Month_Year
 	FROM Monthly_Revenue
-)
+),
 
-SELECT
+Customer_Months AS (
+	SELECT
 		CustomerID,
 		RFM_Score,
-		b.Month_Year,
-		COALESCE(Monthly_Revenue,0) AS Monthly_Revenue
-FROM Monthly_Revenue a
-CROSS JOIN Months b
-ORDER BY CustomerID, b.Month_Year
+		Month_Year
+	FROM Customers
+	CROSS JOIN Months
+),
 
+base AS (
+	SELECT
+			a.CustomerID,
+			a.RFM_Score,
+			a.Month_Year,
+			COALESCE(b.Monthly_Revenue,0) AS Monthly_Revenue
+	FROM Customer_Months a
+	LEFT JOIN Monthly_Revenue b
+		ON a.CustomerID = b.CustomerID
+		AND a.Month_Year = b.Month_Year
+),
 
-
-----Diffs AS (
---	SELECT
---		CustomerID,
---		RFM_Score,
---		b.Month_Year,
---		a.Half,
---		COALESCE(Monthly_Revenue,0),
---		COALESCE(Monthly_Revenue - LAG(Monthly_Revenue, 1) OVER (PARTITION BY CustomerID ORDER BY Month_Year ASC),0) AS Revenue_Diff
---	FROM Monthly_Revenue a
---	FULL JOIN Months b
---		ON a.Month_Year = b.Month_Year
---),
+Diffs AS (
+	SELECT
+		CustomerID,
+		RFM_Score,
+		Month_Year,
+		Monthly_Revenue,
+		CASE
+			WHEN MONTH(Month_Year) < 7 THEN 1
+			ELSE 2
+		END AS Half,
+		COALESCE(Monthly_Revenue - LAG(Monthly_Revenue, 1) OVER (PARTITION BY CustomerID ORDER BY Month_Year ASC),0) AS Revenue_Diff
+	FROM base 
+	ORDER BY CustomerID, Month_Year
+),
 
 --Avg_Diffs AS 
 --(
