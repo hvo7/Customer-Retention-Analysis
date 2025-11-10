@@ -10,7 +10,7 @@
 # Background
 **Simple Prod Co.** is a mid-sized e-commerce retailer specializing in household and lifestyle products. The company manages thousands of unique products ranging from home decor to personal accessories. Over the past few years, the company has accumulated over **4000 transactional customers** over multiple regions and has generated over **$9 million** in sales revenue. 
 
-To sustain long-term profitability and growth, Simple Prod Co recognizes that acquiring new customers is much more costly and less reliable than retaining existing ones. Therefore, Simple Prod Co aims to maximize lifetime value and strengthen loyalty by understanding customer retention trends and repeat purchase behavior.
+To sustain long-term profitability and growth, Simple Prod Co recognizes that acquiring new customers is much more costly and less reliable than retaining existing ones. Therefore, Simple Prod Co aims to **maximize lifetime value** and **strengthen loyalty** by understanding customer retention trends and repeat purchase behavior.
 
 An in-depth analysis was conducted using transactional data from 2010-2011 to evaluate customer retention metrics, determine which products drive repeat purchases, and target top customers for personalized loyalty programs.
 
