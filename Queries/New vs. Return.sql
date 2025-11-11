@@ -25,11 +25,24 @@ First_Buyers AS
 (
 SELECT
 	First_Purchase,
-	COUNT(DISTINCT(CustomerID)) AS Num_Customers
+	COUNT(DISTINCT(CustomerID)) AS New_Customers
 FROM First_Purchases
 GROUP BY First_Purchase
+),
+
+Return_Buyers AS
+(
+	SELECT
+		a.Month_Year,
+		COUNT(DISTINCT(CASE WHEN Month_Year > First_Purchase THEN a.CustomerID END)) AS Return_Cust
+	FROM Orders a
+	LEFT JOIN First_Purchases b
+		ON a.CustomerID = b.CustomerID
+	GROUP By Month_Year
 )
 
-SELECT *
-FROM First_Buyers
-ORDER BY First_Purchase
+SELECT
+	Month_Year, a.New_Customers, b.Return_Cust
+FROM First_Buyers a
+JOIN Return_Buyers b
+	ON a.First_Purchase = b.Month_Year
