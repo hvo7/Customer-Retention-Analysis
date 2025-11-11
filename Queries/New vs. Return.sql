@@ -42,7 +42,7 @@ Return_Buyers AS
 )
 
 SELECT
-	Month_Year, a.New_Customers, b.Return_Cust
+	FORMAT(Month_Year, 'MM - yyyy') AS Month_Year , a.New_Customers, b.Return_Cust
 FROM First_Buyers a
 JOIN Return_Buyers b
 	ON a.First_Purchase = b.Month_Year
