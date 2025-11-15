@@ -26,21 +26,34 @@ RFM AS
 	GROUP BY CustomerID
 ),
 
-Scores AS 
+Quartile_Vals AS
 (
-SELECT 
-	CustomerID,
-	Recent_Purchase,
-	Num_Orders,
-	Total_Revenue,
-	NTILE(4) OVER (ORDER BY Recent_Purchase DESC) AS Recency,
-	NTILE(4) OVER (ORDER BY Num_Orders DESC) AS Frequency,
-	NTILE(4) OVER (ORDER BY Total_Revenue DESC) AS Monetary
-FROM RFM 
+	SELECT
+		MIN(PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Recent_Purchase) OVER ()) AS R_q1,
+		MIN(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY Recent_Purchase) OVER ()) AS R_q2,
+		MIN(PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Recent_Purchase) OVER ()) AS R_q3,
+
+		MIN(PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Num_Orders) OVER ()) AS F_q1,
+		MIN(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY Num_Orders) OVER ()) AS F_q2,
+		MIN(PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Num_Orders) OVER ()) AS F_q3,
+
+		MIN(PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Total_Revenue) OVER ()) AS M_q1,
+		MIN(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY Total_Revenue) OVER ()) AS M_q2,
+		MIN(PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Total_Revenue) OVER ()) AS M_q3
+	FROM RFM
 )
 
+--Scores AS 
+--(
+--SELECT 
+--	CASE
+--		WHEN Recent_Purchase < R_q1 THEN 4
+--		WHEN Recent_Purchase < R_q2 THEN 3
+--		WHEN Recent_Purchase < R_q3 THEN 2
+--	ELSE 1
+--	END AS R
+
+	
 SELECT
-	Num_Orders,
-	Frequency
-FROM Scores
-ORDER  BY Num_Orders DESC
+	*
+FROM Quartile_Vals
