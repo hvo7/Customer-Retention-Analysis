@@ -20,29 +20,15 @@ RFM AS
 		COUNT(DISTINCT(
 						DATEFROMPARTS(YEAR(InvoiceDate), Month(InvoiceDate), DAY(InvoiceDate))
 					   )
-			  ) AS Num_Orders,
+			  ) AS Num_orders,
+		LOG(COUNT(DISTINCT(
+						DATEFROMPARTS(YEAR(InvoiceDate), Month(InvoiceDate), DAY(InvoiceDate))
+					   )
+			  ) + 1) AS Ln_Num_Orders,
 		ROUND(SUM(Revenue),2) AS Total_Revenue
 	FROM Orders
 	GROUP BY CustomerID
 ),
-
-Freq AS
-(
-	SELECT
-		Num_Orders,
-		COUNT(*) AS Frequency
-	FROM RFM
-	GROUP BY Num_Orders
-),
-
-Freq_Score AS
-(
-	SELECT
-		Num_Orders,
-		Frequency,
-		LN(Frequency) AS Ln_Freq
-	FROM Freq
-)
 
 Quintile_Vals AS
 (
@@ -52,16 +38,17 @@ Quintile_Vals AS
 		PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY Days_From_Last DESC) OVER () AS R_q3,
 		PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY Days_From_Last DESC) OVER () AS R_q4,
 
-		PERCENTILE_CONT(0.20) WITHIN GROUP (ORDER BY Num_Orders ASC) OVER () AS F_q1,
-		PERCENTILE_CONT(0.40) WITHIN GROUP (ORDER BY Num_Orders ASC) OVER () AS F_q2,
-		PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY Num_Orders ASC) OVER () AS F_q3,
-		PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY Num_Orders ASC) OVER () AS F_q4,
+		PERCENTILE_CONT(0.20) WITHIN GROUP (ORDER BY Ln_Num_Orders ASC) OVER () AS F_q1,
+		PERCENTILE_CONT(0.40) WITHIN GROUP (ORDER BY Ln_Num_Orders ASC) OVER () AS F_q2,
+		PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY Ln_Num_Orders ASC) OVER () AS F_q3,
+		PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY Ln_Num_Orders ASC) OVER () AS F_q4,
 
 		PERCENTILE_CONT(0.20) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q1,
 		PERCENTILE_CONT(0.40) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q2,
 		PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q3,
 		PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q4
-	FROM RFM
+
+	FROM RFM 
 ),
 
 Calc_Scores AS 
@@ -69,7 +56,8 @@ Calc_Scores AS
 SELECT 
 	CustomerID,
 	Days_From_Last,
-	Num_Orders,
+	Num_orders,
+	Ln_Num_Orders,
 	Total_Revenue,
 
 	CASE
@@ -81,10 +69,10 @@ SELECT
 	END AS R,
 
 	CASE
-		WHEN Num_Orders = F_q1 THEN 1
-		WHEN Num_Orders = F_q2 THEN 2
-		WHEN Num_Orders >= F_q3 THEN 3
-		WHEN Num_Orders = F_q4 THEN 4
+		WHEN Ln_Num_Orders <= F_q1 THEN 1
+		WHEN Ln_Num_Orders <= F_q2 THEN 2
+		WHEN Ln_Num_Orders <= F_q3 THEN 3
+		WHEN Ln_Num_Orders <= F_q4 THEN 4
 	ELSE 5
 	END AS F,
 
@@ -105,7 +93,8 @@ Scores AS
 SELECT
 	CustomerID,
 	Days_From_Last,
-	Num_Orders,
+	Num_orders,
+	Ln_Num_Orders,
 	Total_Revenue,
 	R,
 	F,
@@ -115,7 +104,8 @@ SELECT
 From Calc_Scores
 GROUP BY CustomerID,
 	Days_From_Last,
-	Num_Orders,
+	Num_orders,
+	Ln_Num_Orders,
 	Total_Revenue,
 	R,
 	F,
@@ -142,5 +132,5 @@ Segmentation AS
 
 SELECT
 	*
-FROM Frequency
-ORDER BY Num_Orders ASC
+FROM Scores
+ORDER BY CustomerID
