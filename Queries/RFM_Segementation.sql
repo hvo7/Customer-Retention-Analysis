@@ -48,7 +48,7 @@ Quintile_Vals AS
 		PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q3,
 		PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY Total_Revenue ASC) OVER () AS M_q4
 
-	FROM RFM 
+	FROM RFM
 ),
 
 Calc_Scores AS 
@@ -123,14 +123,30 @@ Segmentation AS
 	RFM,
 	RFM_Sum,
 	CASE 
-		WHEN RFM = '555' THEN 'Champions'
+		WHEN RFM = '555' THEN 'Champions' 
+		WHEN R IN (4,5) AND F IN (3,4) AND M IN (3,4,5) THEN 'Potential Loyalists'
+		WHEN R IN (1,2) AND R + M >= 8 THEN 'High-Value At-Risk'
+		WHEN R = 3 AND F + M >= 8 THEN 'Loyal High-Value' 
+		WHEN R IN (2) AND F + M IN (7,8) THEN 'At-Risk'
+		WHEN R = 3 AND F IN (3,4) AND M IN (3,4) THEN 'Needing Attention'
+		WHEN R IN (4,5) AND F IN (1,2) THEN 'New Customers'
 		WHEN F = 1 AND M = 5 THEN 'Whales' -- High Spender, low frequency
+		WHEN R IN (1) AND F IN (1) THEN 'Lost'
 	END AS Segment
-
 	FROM Scores
 )
 
 SELECT
-	*
-FROM Scores
+	CustomerID,
+	RFM,
+	Segment
+FROM Segmentation
+WHERE Segment IS NULL 
 ORDER BY CustomerID
+
+--SELECT
+--	COUNT(*) AS Count
+--FROM Segmentation
+--WHERE Segment IS NULL
+
+--4339 Total Customers
