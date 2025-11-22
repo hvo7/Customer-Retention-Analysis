@@ -110,39 +110,55 @@ Segmentation AS
 (
 	SELECT
 	CustomerID,
+	Days_From_Last,
+	Num_orders,
+	Ln_Num_Orders,
+	Total_Revenue,
 	R,
 	F,
 	M,
 	RFM,
 	CASE 
-		WHEN RFM = '444' THEN 'Champions' -- 444
-		WHEN (R = 4 AND F = 4 ) 
-			OR (R = 3 AND F = 4 AND M IN (2,3,4) )								
-			OR	(R = 4 AND F = 3 AND M IN (2,3,4) )	THEN 'Loyalist'		
-		WHEN (R = 3 AND F = 2  THEN 'Potential Loyalist'
-		WHEN RFM IN ('424', '414', '413', '423') THEN 'Promising'
-		WHEN R IN (3,4) AND F = 1 THEN 'New Customers'
-		WHEN RFM IN ('322', '323', '332', '333') THEN 'Need Attention' 
-		WHEN RFM IN ('244', '243', '234', '224', '214', '144', '143', '134', '233') THEN 'At-Risk High Value'
-		WHEN RFM IN ('211', '212', '221', '222', '111','112', '113', '114', '121', '122') THEN 'Lost' 
+		WHEN RFM = '444' 
+			THEN 'Champions' -- 444
+		WHEN (R IN (3,4) AND F = 4 ) 
+			THEN 'Loyalist' -- Shop Frequently								
+		WHEN (R = 4 AND F = 3 AND M IN (1,2))
+				OR (R = 3 AND F = 3) -- Approaching Consistent Purchases
+				OR (R = 3 AND F = 2 AND M IN (3,4)) -- High Recency, Med Freq, High Spend = Bought recently, and repeat big purchase
+			THEN 'Potential Loyalist'
+		WHEN (R = 4 AND F IN (2,3) AND R IN (3,4)) 
+			OR (RFM = '314')
+			THEN 'Promising' -- Most Recent Big Purchase, Freq too low to be considered loyal
+		WHEN R = 4 AND F = 1 
+			THEN 'New Customers' -- Most Recent and Lowest Freq, can't fully determine behavior yet
+		WHEN R = 3 AND F IN (1,2) AND M IN (1,2,3) 
+			THEN 'Need Attention'-- High recent, low-med freq, spending is low-okay
+		WHEN (R IN (1,2) AND F = 4)
+				OR (R IN (1,2) AND F IN (1,2,3) AND M IN (3,4) AND RFM NOT IN ('113','114'))
+			THEN 'At-Risk High Value' -- Used to be valuable either in F or M but are inactive
+		WHEN (R = 1 AND F = 1) 
+			OR (R IN (1,2) AND F IN (1,2,3) AND M IN (1,2,3))
+			THEN 'Lost' 
 	ELSE 'Other'
 	END AS Segment
 	FROM Scores
 )
-
-
 
 -- 4 = Highest
 -- 3 = High
 -- 2 = Med
 -- 1  = Low
 
-
 SELECT
-	DISTINCT(RFM)
+	Segment,
+	COUNT(*) AS Num_Cust,
+	ROUND(CAST(COUNT(*) AS FLOAT) / CAST(4339 AS FLOAT),2) AS Num_Cust_Percentage,
+	SUM(Num_Orders) AS Avg_Orders,
+	ROUND(SUM(Total_Revenue),2) AS Total_Revenue
 FROM Segmentation
-WHERE Segment = 'Other'
-
+GROUP BY Segment
+ORDER BY ROUND(SUM(Total_Revenue),2) DESC
 
 --4339 Total Customers
 
