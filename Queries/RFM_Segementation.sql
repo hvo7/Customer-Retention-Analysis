@@ -151,14 +151,19 @@ Segmentation AS
 -- 1  = Low
 
 SELECT
-	Segment,
-	COUNT(*) AS Num_Cust,
-	ROUND(CAST(COUNT(*) AS FLOAT) / CAST(4339 AS FLOAT),2) AS Num_Cust_Percentage,
-	SUM(Num_Orders) AS Avg_Orders,
-	ROUND(SUM(Total_Revenue),2) AS Total_Revenue
+	*
 FROM Segmentation
-GROUP BY Segment
-ORDER BY ROUND(SUM(Total_Revenue),2) DESC
+ORDER BY CustomerID
+
+--SELECT
+--	Segment,
+--	COUNT(*) AS Num_Cust,
+--	ROUND(CAST(COUNT(*) AS FLOAT) / CAST(4339 AS FLOAT),2) AS Num_Cust_Percentage,
+--	SUM(Num_Orders) AS Total_Orders,
+--	ROUND(SUM(Total_Revenue),2) AS Total_Revenue
+--FROM Segmentation
+--GROUP BY Segment
+--ORDER BY ROUND(SUM(Total_Revenue),2) DESC
 
 --4339 Total Customers
 
