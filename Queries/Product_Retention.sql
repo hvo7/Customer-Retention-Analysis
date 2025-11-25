@@ -67,19 +67,41 @@ SELECT
 	Product,
 	COUNT(DISTINCT CustomerID) AS Total_Customers,
 	COUNT(DISTINCT CASE WHEN Churn_Flag = 1 THEN CustomerID END) AS Churned_Customers,
+
 	CAST 
 	( 
 		1.0 * COUNT(DISTINCT CASE WHEN Churn_Flag = 1 THEN CustomerID END) / 	NULLIF(COUNT(DISTINCT CustomerID),0)		
 	 AS DECIMAL(5,3)
 	) AS Churn_Rate,
 	Avg_Churn_Rate,
+
 	CAST 
 	(
 		(1.0 * COUNT(DISTINCT CASE WHEN Churn_Flag = 1 THEN CustomerID END)  / 	NULLIF(COUNT(DISTINCT CustomerID),0))
 	 - Avg_Churn_Rate
 	 AS DECIMAL(5,3)
-	) AS Churn_Lift
+	) AS Churn_Lift,
+
+	CASE 
+		WHEN CAST 
+				(
+					(1.0 * COUNT(DISTINCT CASE WHEN Churn_Flag = 1 THEN CustomerID END)  / 	NULLIF(COUNT(DISTINCT CustomerID),0))
+				 - Avg_Churn_Rate
+				 AS DECIMAL(5,3)
+				) > 0 
+			THEN 'Risky_Product'
+		WHEN CAST 
+				(
+					(1.0 * COUNT(DISTINCT CASE WHEN Churn_Flag = 1 THEN CustomerID END)  / 	NULLIF(COUNT(DISTINCT CustomerID),0))
+				 - Avg_Churn_Rate
+				 AS DECIMAL(5,3)
+				) < 0 
+			THEN 'Hero_Product'
+		ELSE 'Neutral'
+	END AS Product_Label
+				
 FROM Customer_Product_Churn
 CROSS JOIN Avg_Churn_Rate
 GROUP BY Product, Avg_Churn_Rate
+HAVING COUNT(DISTINCT CustomerID) >= 30 -- Remove edge cases that have small customer sample size
 ORDER BY Churn_Lift DESC
