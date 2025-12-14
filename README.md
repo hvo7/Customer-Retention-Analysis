@@ -3,7 +3,6 @@
 # Table of Contents
 - [Background](#Background)
 - [Northstar Metrics](#Northstar-Metrics)
-- [Dashboard](#Dashboard)
 - [Additional Info ](#Additional-Info)
 
 
@@ -19,10 +18,6 @@ An in-depth analysis was conducted using transactional data from 2010-2011 to ev
 - **Revenue and Sales Performance - Focusing on key metrics such as Average Revenue and Average Number of Orders per Customer**
 - **Product Performance - Analyzing different product, market impact, and declining repeat purchases to generate strategic product decisions.**
 - **Customer Value Segmentation - Segmenting customers into buckets based on RFM Analysis and comparing retention metrics across groups to identify and evaluate valuable targets.**
-
-# Dashboard
-[![Open the interactive dashboard](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard.png?:showVizHome=no&:refresh=yes)](https://public.tableau.com/views/Customer_Retention_Dashboard/Dashboard?:showVizHome=no)
-
 
 # Additional Info 
 The dataset comes from 
