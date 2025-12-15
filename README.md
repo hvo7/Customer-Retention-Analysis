@@ -2,7 +2,7 @@
 
 # Table of Contents
 - [Background](#Background)
-- [Northstar Metrics](#Northstar-Metrics)
+- [Key Insights](#key-insights)
 - [Additional Info ](#Additional-Info)
 
 
@@ -21,11 +21,13 @@ In order to support targeted retention and marketing strategies, which would ena
 
 # Key Insights
 
-![New vs. Returning Customers Trend](images/New vs. Returning Customer MoM.png)
-* Repeat Customers are becoming an increasingly more important driver of revenue. 
+## Repeat Customers are becoming an increasingly more important driver of revenue. 
+
+![New vs. Returning Customers Trend](https://github.com/hvo7/Customer-Retention-Analysis/blob/4a875d814fcaf6ea6a75ceca41ee8fc13808f4c6/Images/New%20vs.%20Returning%20Customer%20MoM.png)
+
 * Prioritizing returning customers is a great opportunity to sustain long-term growth 
 
-
+## 
 
 
 
