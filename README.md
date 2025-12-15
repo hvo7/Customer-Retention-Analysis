@@ -30,13 +30,19 @@ In order to support targeted retention and marketing strategies, which would ena
 
 ### Repeat Customers are becoming an increasingly more important driver of revenue. 
 ### Prioritizing returning customers is a great opportunity to sustain long-term growth 
-
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
 ![Cohort Analysis](https://github.com/hvo7/Customer-Retention-Analysis/blob/d8ba139610ef01c2959d054f8d971b700c96804a/Images/Cohort_Analysis.png)
 
 ### Most customers are inactive within the first month but return after about 5-7 months.
-
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
 
@@ -44,7 +50,10 @@ In order to support targeted retention and marketing strategies, which would ena
 
 ### Champions make up the majority of our revenue and thus should be maintained.
 ### Prioritize "Lost" and "At-Risk High Value customers" since they have the revenue ROI
-
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
 
@@ -54,7 +63,10 @@ In order to support targeted retention and marketing strategies, which would ena
 ![Churn Window](https://github.com/hvo7/Customer-Retention-Analysis/blob/dd1a919af6299fe08909bb918b6ee0fdfba8088c/Images/Churn_Window.png)
 
 ### Customers are considered churned after ~70 days, helping focus our target population further
-
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
 
@@ -65,7 +77,10 @@ In order to support targeted retention and marketing strategies, which would ena
 ![Top 15 Customers at Risk](https://github.com/hvo7/Customer-Retention-Analysis/blob/dd1a919af6299fe08909bb918b6ee0fdfba8088c/Images/Top%2015%20Targets.png)
 
 ### Targeting these customers will yield the highest ROI 
-
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 
 
 
