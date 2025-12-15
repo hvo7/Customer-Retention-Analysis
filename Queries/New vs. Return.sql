@@ -1,3 +1,7 @@
+-- Objective: Graph the number of return purchasers vs. One time buyers over time to see how they are trending
+-- Conclusion: Repeat Purchasers are increasing in number 
+--				One time buyers are mostly stagnant in number
+
 USE Online_Retail;
 
 WITH Orders AS 

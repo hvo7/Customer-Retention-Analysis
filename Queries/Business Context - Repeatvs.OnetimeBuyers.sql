@@ -1,3 +1,9 @@
+-- Objective: Examine the differences in revenue and number of customers for one time buyers vs. repeat purchasers
+--
+-- Conclusion: 
+--			Repeat Purchasers represent the majority of customers
+--			Repeat Purchasers contribute much more to total revenue than one time buyers
+
 USE Online_Retail;
 
 WITH Orders AS 

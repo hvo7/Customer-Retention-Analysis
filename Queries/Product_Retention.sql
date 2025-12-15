@@ -1,3 +1,5 @@
+-- Objective: Assign churn rates for each product to determine which products we should target based on highest churn rate
+
 USE Online_Retail;
 
 WITH Last_Purchase AS
@@ -26,7 +28,7 @@ Churn AS
 		CustomerID,
 		DATEDIFF(DAY, Last_Purchase, Max_Date) AS Date_From_Last,
 		CASE
-			WHEN DATEDIFF(DAY, Last_Purchase, Max_Date) > 86
+			WHEN DATEDIFF(DAY, Last_Purchase, Max_Date) > 70 -- Use the Global Churn Window 
 				THEN 1
 			ELSE 0
 		END AS Churn_Flag

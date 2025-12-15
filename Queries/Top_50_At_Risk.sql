@@ -1,3 +1,5 @@
+-- Objective: Establish the top 50 customers based on churn score
+
 USE Online_Retail;
 
 WITH Purchases AS
@@ -62,7 +64,7 @@ Churn_Score AS
 		CAST(Personal_Churn_Window AS FLOAT) AS Personal_Churn_Window,
 		CASE
 			WHEN (Num_Purchase_Dates = 2) 
-				THEN Days_From_End / 86.0 -- Use Global Churn Window 
+				THEN Days_From_End / 70 -- Use Global Churn Window 
 			ELSE
 				Days_From_End / CAST(Personal_Churn_Window AS FLOAT) 
 			END AS Churn_Risk_Score

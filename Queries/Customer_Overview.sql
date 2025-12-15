@@ -1,3 +1,5 @@
+-- Objective: Get a overview of current number of orders, revenue, number of customers
+
 USE Online_Retail;
 
 WITH Purchases AS

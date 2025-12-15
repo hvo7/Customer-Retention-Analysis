@@ -1,3 +1,5 @@
+-- Objective: Perform cohort analysis to discover how monthly cohorts perform and how retention and churn behaviors change over time
+
 USE Online_Retail;
 
 

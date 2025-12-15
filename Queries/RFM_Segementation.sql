@@ -1,3 +1,6 @@
+-- Objective: Segment Customers based on RFM Analysis and determine how each segment contributes to revenue and number of orders
+-- Conclusion: Lost and At-risk High Value represent almost half of customers and 20% of revenue -> Best ROI opportunity
+
 USE Online_Retail;
 
 WITH Orders AS
@@ -148,18 +151,26 @@ Segmentation AS
 -- 4 = Highest
 -- 3 = High
 -- 2 = Med
--- 1  = Low
+-- 1  = LoW
 
-SELECT
-	Segment,
-	COUNT(*) AS Num_Cust,
-	ROUND(CAST(COUNT(*) AS FLOAT) / CAST(4339 AS FLOAT),4) AS Num_Cust_Percentage,
-	SUM(Num_Orders) AS Total_Orders,
-	ROUND(SUM(Total_Revenue),4) AS Total_Revenue,
-	ROUND(CAST(SUM(Total_Revenue) AS FLOAT) / CAST(6501398.3 AS FLOAT),4) AS Percent_Rev
+SELECT *
 FROM Segmentation
-GROUP BY Segment
-ORDER BY ROUND(SUM(Total_Revenue),2) DESC
+ORDER BY CustomerID ASC
+
+
+
+-- Look at Segment Metrics grouped by each segment
+
+--SELECT
+--	Segment,
+--	COUNT(*) AS Num_Cust,
+--	ROUND(CAST(COUNT(*) AS FLOAT) / CAST(4339 AS FLOAT),4) AS Num_Cust_Percentage,
+--	SUM(Num_Orders) AS Total_Orders,
+--	ROUND(SUM(Total_Revenue),4) AS Total_Revenue,
+--	ROUND(CAST(SUM(Total_Revenue) AS FLOAT) / CAST(6501398.3 AS FLOAT),4) AS Percent_Rev
+--FROM Segmentation
+--GROUP BY Segment
+--ORDER BY ROUND(SUM(Total_Revenue),2) DESC
 
 --4339 Total Customers
 

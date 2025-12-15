@@ -1,4 +1,4 @@
-﻿CustomerID,Days_From_Last,Num_orders,Ln_Num_Orders,Total_Revenue,R,F,M,RFM,Segment
+﻿CustomerID,Days_From_Last,Num_Orders,Ln_Num_Orders,Total_Revenue,R,F,M,RFM,Segment
 12346,326,1,0.693147181,77183.6,1,1,4,114,Lost
 12347,3,7,2.079441542,3042.58,4,4,4,444,Champions
 12348,76,4,1.609437912,1399.8,2,3,4,234,At-Risk High Value

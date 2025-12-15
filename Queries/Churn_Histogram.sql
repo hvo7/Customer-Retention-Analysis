@@ -1,92 +1,36 @@
+-- Objective: Determine how long 80% of repeat purchases go before churning (Define the churn window)
+-- Conclusion: 80% of repeat purchases occur before 70 days from the previous purchase
+
 USE Online_Retail;
-
--- Calculate Churn Window: 86 Days
--- We use the 80% rule where "80% of customer purchase gaps are X amount of days or less (X is our churn window). Beyond X, customers are very likely to churn"
--- X = 86 Days
-
---WITH Purchases AS 
---(
---	SELECT
---		CustomerID,
---		InvoiceNo,
---		MIN(InvoiceDate) AS InvoiceDate
---	FROM dbo.Online_Retail_Analysis
---	WHERE CustomerID IS NOT NULL
---		AND InvoiceNo NOT LIKE '%C%'
---	GROUP BY CustomerID, InvoiceNo
---),
-
---Next_Date AS
---(
---	SELECT
---		CustomerID,
---		InvoiceNo,
---		InvoiceDate,
---		LEAD(InvoiceDate) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Next_Date
---	FROM Purchases
---),
-
---Gaps AS
---(
---	SELECT
---		CustomerID,
---		InvoiceNo,
---		InvoiceDate,
---		CASE
---			WHEN Next_Date IS NULL THEN DATEDIFF(DAY, InvoiceDate, (SELECT MAX(InvoiceDate) FROM dbo.Online_Retail_Analysis)) 
---			ELSE DATEDIFF(DAY, InvoiceDate, Next_Date) 
---			END AS Days_From_Last
---	FROM Next_Date
---)
-
---SELECT
---	PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY Days_From_Last ASC) OVER () AS Churn_Window
---FROM Gaps
---WHERE Days_From_Last > 0
 
 WITH Purchases AS 
 (
 	SELECT
+	DISTINCT
 		CustomerID,
-		InvoiceNo,
-		MIN(InvoiceDate) AS InvoiceDate
+		CAST(InvoiceDate AS DATE) AS InvoiceDate
 	FROM dbo.Online_Retail_Analysis
 	WHERE CustomerID IS NOT NULL
 		AND InvoiceNo NOT LIKE '%C%'
-	GROUP BY CustomerID, InvoiceNo
+	GROUP BY
+		CustomerID,
+		CAST(InvoiceDate AS DATE)
 ),
 
-First_Last_Purchases AS
+Gaps AS
 (
 	SELECT
 		CustomerID,
-		MAX(InvoiceDate) AS Last_Purchase,
-		MIN(InvoiceDate) AS First_Purchase
+		InvoiceDate,
+		LAG(InvoiceDate) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Prev_Purchase,
+		DATEDIFF(DAY, LAG(InvoiceDate) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC), InvoiceDate) AS Gap
 	FROM Purchases
-	GROUP BY CustomerID
-),
-
-Lifetime AS
-(
-	SELECT
-		CustomerID,
-		DATEDIFF(DAY, First_Purchase, Last_Purchase) AS Lifetime
-	FROM First_Last_Purchases
-),
-
-Final_Gap AS
-(
-	SELECT
-		a.CustomerID,
-		DATEDIFF(DAY, Last_Purchase, (SELECT MAX(InvoiceDate) FROM dbo.Online_Retail_Analysis)) AS Final_Gap
-	FROM First_Last_Purchases a
 )
 
-SELECT
-	a.CustomerID,
-	Lifetime,
-	Final_Gap
-FROM Final_Gap a
-	LEFT JOIN Lifetime b
-		ON a.CustomerID = b.CustomerID
-WHERE Final_Gap > 86
+SELECT 
+	Gap,
+	COUNT(*) AS Count
+FROM Gaps  
+WHERE Gap IS NOT NULL
+GROUP BY Gap
+ORDER BY Gap ASC
