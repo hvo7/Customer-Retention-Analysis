@@ -30,6 +30,12 @@ In order to support targeted retention and marketing strategies, which would ena
 ## 
 
 
+![Cohort Analysis](https://github.com/hvo7/Customer-Retention-Analysis/blob/d8ba139610ef01c2959d054f8d971b700c96804a/Images/Cohort_Analysis.png)
+
+
+![Segment Metrics](https://github.com/hvo7/Customer-Retention-Analysis/blob/d8ba139610ef01c2959d054f8d971b700c96804a/Images/Segment_Metrics.png)
+
+
 
 # Additional Info 
 The dataset comes from 
