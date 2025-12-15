@@ -6,7 +6,7 @@
 - [Key Insights](#key-insights)
 - [Additional Info ](#Additional-Info)
 <br><br>
-  👉[View Full Slide Deck](https://github.com/hvo7/Customer-Retention-Analysis/blob/2ac5e9695f52fe2dfcdc8d27d2665a7c3ad364a9/Customer%20Retention%20Analysis.pptx)
+  👉[Download Full Slide Deck](https://github.com/hvo7/Customer-Retention-Analysis/blob/2ac5e9695f52fe2dfcdc8d27d2665a7c3ad364a9/Customer%20Retention%20Analysis.pptx)
 <br><br>
 # Background
 **Simple Prod Co.** is a mid-sized e-commerce retailer specializing in household and lifestyle products, offering thousands of unique products ranging from home decor to personal accessories. Over the past few years, the company has accumulated over **4000 transactional customers** over multiple regions and has generated over **$9 million** in sales revenue. 
