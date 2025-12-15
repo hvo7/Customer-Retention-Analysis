@@ -2,6 +2,7 @@
 
 # Table of Contents
 - [Background](#Background)
+- [Recommendations](#Recommendations)
 - [Key Insights](#key-insights)
 - [Additional Info ](#Additional-Info)
 
