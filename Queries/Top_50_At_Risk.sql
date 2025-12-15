@@ -5,19 +5,25 @@ USE Online_Retail;
 WITH Purchases AS
 (
 	SELECT
-		CustomerID,
+		a.CustomerID,
 		CAST(InvoiceDate AS DATE) AS InvoiceDate,
-		COUNT(CAST(InvoiceDate AS DATE)) OVER (PARTITION BY CustomerID) AS Num_Purchase_Dates
-	FROM dbo.Online_Retail_Analysis
-	WHERE CustomerID IS NOT NULL
+		COUNT(CAST(InvoiceDate AS DATE)) OVER (PARTITION BY a.CustomerID) AS Num_Purchase_Dates,
+		RFM,
+		Segment
+	FROM dbo.Online_Retail_Analysis a
+	JOIN dbo.[RFM_Segmentation - Customer Level] b
+		ON a.CustomerID = b.CustomerID
+	WHERE a.CustomerID IS NOT NULL
 		AND InvoiceNo NOT LIKE '%C%'
-	GROUP BY CustomerID, CAST(InvoiceDate AS DATE)
+	GROUP BY a.CustomerID, CAST(InvoiceDate AS DATE), RFM, Segment
 ),
 
 Next_Date AS 
 (
 	SELECT
 		CustomerID,
+		RFM,
+		Segment,
 		InvoiceDate,
 		Num_Purchase_Dates,
 		LEAD(InvoiceDate) OVER (PARTITION BY CustomerID ORDER BY InvoiceDate ASC) AS Next_Date
@@ -28,6 +34,8 @@ Gaps AS
 (
 	SELECT
 		CustomerID,
+		RFM,
+		Segment,
 		InvoiceDate,
 		Num_Purchase_Dates,
 		DATEDIFF(DAY, InvoiceDate, Next_Date) AS Days_From_Next
@@ -41,6 +49,8 @@ Personal_Churn AS
 (
 	SELECT DISTINCT
 		CustomerID,
+		RFM,
+		Segment,
 		Num_Purchase_Dates,
 		PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY Days_From_Next ASC) OVER (PARTITION BY CustomerID) AS Personal_Churn_Window
 	FROM Gaps
@@ -59,6 +69,8 @@ Churn_Score AS
 (
 	SELECT
 		a.CustomerID,
+		RFM,
+		Segment,
 		Num_Purchase_Dates,
 		Days_From_End,
 		CAST(Personal_Churn_Window AS FLOAT) AS Personal_Churn_Window,
