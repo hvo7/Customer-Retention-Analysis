@@ -36,7 +36,7 @@ As returning customers are becoming an increasingly crucial driver of revenue, m
 * * One-time buyers are particularly stagnant
 * **Q2** yielded no growth in returning customers or one time purchasers
 
-![New vs. Returning Customers Trend](https://github.com/hvo7/Customer-Retention-Analysis/blob/4a875d814fcaf6ea6a75ceca41ee8fc13808f4c6/Images/New%20vs.%20Returning%20Customer%20MoM.png)
+![New vs. Returning Customers Trend](https://github.com/hvo7/Customer-Retention-Analysis/blob/6384b82d9f6cdaea5b698f16f46548933b592ed5/Images/New%20vs.%20Returning%20Customer%20MoM.png)
 
 
 
