@@ -3,7 +3,7 @@
 # Table of Contents
 - [Background](#Background)
 - [Recommendations](#Recommendations)
-- [Key Insights](#key-insights)
+- [Executive Summary](#Executive-Summary)
 - [Additional Info ](#Additional-Info)
 <br><br>
   👉[Download Full Slide Deck](https://github.com/hvo7/Customer-Retention-Analysis/blob/2ac5e9695f52fe2dfcdc8d27d2665a7c3ad364a9/Customer%20Retention%20Analysis.pptx)
@@ -26,12 +26,22 @@ In order to support targeted retention and marketing strategies, which would ena
 * Establish win-back campaigns to target 'Lost' customers, prioritizing those with the highest churn score
 * Enable re-engagement strategies to 'At-risk high value' customers by sending reminder emails or product promotions
 
-# Key Insights
+# Executive Summary
+
+## Overview
+As returning customers are becoming an increasingly crucial driver of revenue, making **retaining customers** a higher ROI than new customer acquisition. However, **~80%** of churn occurs early on and at scale, thus creating a small window for intervention.      Furthermore, revenue is primarily concentrated within 3 customer segments: Champions, At-Risk High Value, Lost, representing over 60% of customers and over 70% of total revenue. Thus, customers with the highest churn rate within these segments are great targets for intervention, providing the highest ROI for a targeted marketing campaign.
+
+# 1. Repeat Customers are becoming an increasingly more important driver of revenue
+* Prioritizing returning customers is a great opportunity to sustain long-term growth
+* * One-time buyers are particularly stagnant
+* **Q2** yielded no growth in returning customers or one time purchasers
 
 ![New vs. Returning Customers Trend](https://github.com/hvo7/Customer-Retention-Analysis/blob/4a875d814fcaf6ea6a75ceca41ee8fc13808f4c6/Images/New%20vs.%20Returning%20Customer%20MoM.png)
 
-### Repeat Customers are becoming an increasingly more important driver of revenue. 
-### Prioritizing returning customers is a great opportunity to sustain long-term growth 
+
+
+ 
+
 <br><br>
 <br><br>
 <br><br>
