@@ -1,6 +1,8 @@
--- Objective: Graph the number of return purchasers vs. One time buyers over time to see how they are trending
--- Conclusion: Repeat Purchasers are increasing in number 
---				One time buyers are mostly stagnant in number
+ --Objective: Graph the number of return purchasers vs. One time buyers over time to see how they are trending
+ --Conclusion: Repeat Purchasers are increasing in number 
+	--		 New Purchasers are mostly stagnant in number
+ --This creates the line chart of new vs. returning customers
+
 
 USE Online_Retail;
 
@@ -14,7 +16,6 @@ WITH Orders AS
 		AND CustomerID IS NOT NULL
 	GROUP BY CustomerID, YEAR(InvoiceDate), MONTH(InvoiceDate)
 ),
-
 
 First_Purchases AS 
 (
